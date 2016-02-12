@@ -32,8 +32,8 @@
 
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
-						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
-						"ken", "ken");
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+                        "sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -48,7 +48,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO ThesisCommittee VALUES (?, ?, ?)");
+                            "INSERT INTO thesisCommittee VALUES (?, ?, ?)");
  
                         pstmt.setString(1, request.getParameter("ID"));
                         pstmt.setString(2, request.getParameter("FACULTYNAME"));
@@ -73,7 +73,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE ThesisCommittee SET FACULTYNAME = ?, " + 
+                            "UPDATE thesisCommittee SET FACULTYNAME = ?, " + 
                             "FACULTYDEPT = ? WHERE ID = ?");
 
                         pstmt.setString(1, request.getParameter("FACULTYNAME"));
@@ -98,7 +98,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM ThesisCommittee WHERE ID = ? AND FACULTYNAME = ?");
+                            "DELETE FROM thesisCommittee WHERE ID = ? AND FACULTYNAME = ?");
 
                         pstmt.setString(1, request.getParameter("ID"));
                         pstmt.setString(2, request.getParameter("FACULTYNAME"));
@@ -118,7 +118,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM ThesisCommittee");
+                        ("SELECT * FROM thesisCommittee");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -161,11 +161,10 @@
                                 <input value="<%= rs.getString("FACULTYDEPT") %>" 
                                     name="FACULTYDEPT" size="5">
                             </td>
-<%--
+                        <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
                             </td>
- --%>
                         </form>
                         
                         <form action="thesiscommittees.jsp" method="get">
