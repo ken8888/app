@@ -1,7 +1,8 @@
 create table faculty(
-lastname varchar(10),
-firstname varchar(10),
-middlename varchar(10),
-title varchar(10),
-deptname varchar(10)
+lastname varchar(50),
+firstname varchar(50),
+middlename varchar(50),
+title varchar(50),
+deptname varchar(50)
+primary key(lastname)
 );

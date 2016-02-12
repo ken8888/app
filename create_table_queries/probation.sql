@@ -1,8 +1,8 @@
 create table probation(
 	id int not null unique,
-	studentid varchar(10),
-	startdate varchar(10),
-	enddate varchar(10),
-	reason varchar(10),
+	studentid varchar(50),
+	startdate varchar(50),
+	enddate varchar(50),
+	reason varchar(50),
 	primary key (id)
 	);

@@ -31,9 +31,9 @@
                         (new com.microsoft.sqlserver.jdbc.SQLServerDriver());
     
                     // Make a connection to the Oracle datasource "cse132b"
-                    Connection conn = DriverManager.getConnection
-                        ("jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b", 
-                            "ken", "ken");
+                    Connection conn = DriverManager.getConnection(
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+                        "sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -48,7 +48,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO StudentEnrollment VALUES (?, ?)");
+                            "INSERT INTO studentEnrollment VALUES (?, ?)");
  
                         pstmt.setString(1, request.getParameter("STUDENTID"));
                         pstmt.setString(2, request.getParameter("TERM"));
@@ -72,7 +72,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE StudentEnrollment SET TERM = ? WHERE STUDENTID = ?");
+                            "UPDATE studentEnrollment SET TERM = ? WHERE STUDENTID = ?");
 
                         pstmt.setString(1, request.getParameter("TERM"));
                         pstmt.setString(2, request.getParameter("STUDENTID"));
@@ -96,7 +96,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM StudentEnrollment WHERE STUDENTID = ? AND TERM = ?");
+                            "DELETE FROM studentEnrollment WHERE STUDENTID = ? AND TERM = ?");
 
                         pstmt.setString(1, request.getParameter("STUDENTID"));
                         pstmt.setString(2, request.getParameter("TERM"));
@@ -116,7 +116,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM StudentEnrollment");
+                        ("SELECT * FROM studentEnrollment");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -156,6 +156,11 @@
                             <td>
                                 <input value="<%= rs.getString("TERM") %>" 
                                     name="TERM" size="5">
+                            </td>
+
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Update">
                             </td>
     
                         </form>
