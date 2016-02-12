@@ -1,5 +1,5 @@
 create table department(
-	name varchar(10),
-	abbrev varchar(10),
+	name varchar(50),
+	abbrev varchar(50),
 	primary key(name)
 	);
