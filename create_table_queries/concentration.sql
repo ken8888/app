@@ -1,4 +1,4 @@
 create table concentration(
-	name varchar(10),
-	reqcourse varchar(10),
+	name varchar(50),
+	reqcourse varchar(50),
 	);

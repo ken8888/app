@@ -32,8 +32,8 @@
 
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
-						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
-						"ken", "ken");
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+                        "sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -48,7 +48,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Concentration VALUES (?, ?)");
+                            "INSERT INTO concentration VALUES (?, ?)");
  
                         pstmt.setString(1, request.getParameter("NAME"));
                         pstmt.setString(2, request.getParameter("REQCOURSE"));
@@ -72,7 +72,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Concentration SET REQCOURSE = ? WHERE NAME = ?");
+                            "UPDATE concentration SET REQCOURSE = ? WHERE NAME = ?");
 
                         pstmt.setString(1, request.getParameter("REQCOURSE"));
                         pstmt.setString(2, request.getParameter("NAME"));
@@ -96,7 +96,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Concentration WHERE NAME = ? AND REQCOURSE = ?");
+                            "DELETE FROM concentration WHERE NAME = ? AND REQCOURSE = ?");
 
                         pstmt.setString(1, request.getParameter("NAME"));
                         pstmt.setString(2, request.getParameter("REQCOURSE"));
@@ -116,7 +116,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Concentration");
+                        ("SELECT * FROM concentration");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -157,6 +157,10 @@
                                 <input value="<%= rs.getString("REQCOURSE") %>" 
                                     name="REQCOURSE" size="20">
                             </td>
+                            <%-- Button --%>
+                            <td>
+                                <input type="submit" value="Update">
+                            </td>
     
                         </form>
                         <form action="concentrations.jsp" method="get">
@@ -195,9 +199,6 @@
             </td>
         </tr>
     </table>
-
-
-
 
 </body>
 

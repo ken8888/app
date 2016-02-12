@@ -1,8 +1,8 @@
-create table degreecategory(
-degreeid varchar(10),
-category varchar(10),
+create table degreeCategory(
+degreeid varchar(50),
+category varchar(50),
 lowerdivunits int,
 upperdivunits int,
-gpareq varchar(10),
+gpareq varchar(50),
 foreign key(degreeid) references degree(id)
 );
