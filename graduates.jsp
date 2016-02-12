@@ -4,6 +4,7 @@
 <html>
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Graduates</title>
 </head>
 
@@ -66,6 +67,7 @@
             <%
                     // Check if an update is requested
                     if (action != null && action.equals("update")) {
+                        
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
@@ -96,6 +98,7 @@
             <%
                     // Check if a delete is requested
                     if (action != null && action.equals("delete")) {
+                        
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
@@ -103,6 +106,7 @@
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "DELETE FROM graduate WHERE STUDENTID = ?");
+                        
                         pstmt.setString(1, request.getParameter("STUDENTID"));
                         
                         int rowCount = pstmt.executeUpdate();
@@ -139,10 +143,10 @@
                         <form action="graduates.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="STUDENTID" size="15"></th>
-                            <th><input value="" name="DEPTNAME" size="5"></th>
-                            <th><input value="" name="CLASSIFICATION" size="5"></th>
-                            <th><input value="" name="IS_PRECANDIDATE" size="5"></th>
-                            <th><input value="" name="IS_CANDIDATE" size="5"></th>
+                            <th><input value="" name="DEPTNAME" size="15"></th>
+                            <th><input value="" name="CLASSIFICATION" size="15"></th>
+                            <th><input value="" name="IS_PRECANDIDATE" size="15"></th>
+                            <th><input value="" name="IS_CANDIDATE" size="15"></th>
                             <th><input value="" name="CANDIDATE_ADVISOR" size="15"></th>
                             <th><input value="" name="COMMITTEEID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -202,7 +206,6 @@
                                 <input value="<%= rs.getString("COMMITTEEID") %>" 
                                     name="COMMITTEEID" size="15">
                             </td>
-
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
