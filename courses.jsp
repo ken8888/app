@@ -214,7 +214,7 @@
                         <form action="courses.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getString("title") %>" name="title">
+                                value="<%= rs.getString("coursenumber") %>" name="coursenumber">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
