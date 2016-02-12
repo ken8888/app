@@ -1,10 +1,10 @@
 create table graduate(
-	studentid varchar(10),
-	deptname varchar(10),
-	classification varchar(10),
-	is_precandidate varchar(10),
-	is_candidate varchar(10),
-	candidate_advisor varchar(10),
-	committeeid varchar(10),
+	studentid varchar(50),
+	deptname varchar(50),
+	classification varchar(50),
+	is_precandidate varchar(50),
+	is_candidate varchar(50),
+	candidate_advisor varchar(50),
+	committeeid varchar(50),
 	foreign key (studentid) references student(id)
 	);
