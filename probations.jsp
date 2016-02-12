@@ -26,14 +26,12 @@
             <%-- -------- Open Connection Code -------- --%>
             <%
                 try {
-                    // Load PostGreSQL Driver class file
-                    DriverManager
+                   DriverManager
 						.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 
-                    // Make a connection to the datasource "cse132b"
-                    Connection conn = DriverManager.getConnection(
-						"jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
-						"sahmed123", "sahmed123");
+				Connection conn = DriverManager.getConnection(
+						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
+						"ken", "ken");
             %>
 
             <%-- -------- INSERT Code -------- --%>

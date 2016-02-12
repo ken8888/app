@@ -26,14 +26,12 @@
             <%-- -------- Open Connection Code -------- --%>
             <%
                 try {
-                     // Load Oracle Driver class file
-                    DriverManager.registerDriver
-                        (new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-    
-                    // Make a connection to the Oracle datasource "cse132b"
-                    Connection conn = DriverManager.getConnection(
-                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
-                        "sahmed123", "sahmed123");
+                     DriverManager
+						.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+
+				Connection conn = DriverManager.getConnection(
+						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
+						"ken", "ken");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -48,10 +46,14 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO studentEnrollment VALUES (?, ?)");
+                            "INSERT INTO studentEnrollment VALUES (?, ?, ?,?,?)");
  
                         pstmt.setString(1, request.getParameter("STUDENTID"));
-                        pstmt.setString(2, request.getParameter("TERM"));
+                        pstmt.setString(2, request.getParameter("COURSENUMBER"));
+                        pstmt.setString(3, request.getParameter("SECTIONID"));
+                        pstmt.setString(4, request.getParameter("TERM"));
+                        pstmt.setString(5, request.getParameter("UNITS"));
+
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -96,10 +98,10 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM studentEnrollment WHERE STUDENTID = ? AND TERM = ?");
+                            "DELETE FROM studentEnrollment WHERE STUDENTID = ? AND SECTIONID = ?");
 
                         pstmt.setString(1, request.getParameter("STUDENTID"));
-                        pstmt.setString(2, request.getParameter("TERM"));
+                        pstmt.setString(2, request.getParameter("SECTIONID"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -123,13 +125,19 @@
                 <table border="1">
                     <tr>
                         <th>Student ID</th>
+                         <th>Course Number</th>
+                            <th>Section ID</th>
                         <th>Term</th>
+                        <th>Units</th>
                     </tr>
                     <tr>
                         <form action="student_enrollment.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="STUDENTID" size="10"></th>
+    <th><input value="" name="COURSENUMBER" size="10"></th>
+    <th><input value="" name="SECTIONID" size="10"></th>
                             <th><input value="" name="TERM" size="5"></th>
+    <th><input value="" name="UNITS" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -152,11 +160,25 @@
                                     name="STUDENTID" size="10">
                             </td>
 
+    <td>
+    <input value="<%= rs.getString("COURSENUMBER") %>"
+    name="COURSENUMBER" size="10">
+    </td>
+
+    <td>
+    <input value="<%= rs.getString("SECTIONID") %>"
+    name="SECTIONID" size="10">
+    </td>
+
                             <%-- Get the SSN, which is a number --%>
                             <td>
                                 <input value="<%= rs.getString("TERM") %>" 
                                     name="TERM" size="5">
                             </td>
+    <td>
+    <input value="<%= rs.getString("UNITS") %>"
+    name="UNITS" size="10">
+    </td>
 
                             <%-- Button --%>
                             <td>
@@ -169,7 +191,7 @@
                             <input type="hidden" 
                                 value="<%= rs.getString("STUDENTID") %>" name="STUDENTID">
                             <input type="hidden" 
-                                value="<%= rs.getString("TERM") %>" name="TERM">
+                                value="<%= rs.getString("SECTIONID") %>" name="SECTIONID">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
