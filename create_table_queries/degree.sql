@@ -1,7 +1,7 @@
 create table degree(
-	id varchar(10),
-	title varchar(10),
-	deptname varchar(10),
+	id varchar(50),
+	title varchar(50),
+	deptname varchar(50),
 	unitsreq int,
 	primary key(id)
 	);

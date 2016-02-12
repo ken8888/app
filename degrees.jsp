@@ -32,8 +32,8 @@
 
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
-						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
-						"ken", "ken");
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+                        "sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -48,7 +48,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Degree VALUES (?, ?, ?, ?)");
+                            "INSERT INTO degree VALUES (?, ?, ?, ?)");
  
                         pstmt.setString(1, request.getParameter("ID"));
                         pstmt.setString(2, request.getParameter("TITLE"));
@@ -75,7 +75,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Degree SET TITLE = ?, DEPTNAME = ?, " + 
+                            "UPDATE degree SET TITLE = ?, DEPTNAME = ?, " + 
                             "UNITSREQ = ? WHERE ID = ?");
 
                         pstmt.setString(1, request.getParameter("TITLE"));
@@ -102,7 +102,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Degree WHERE ID = ?");
+                            "DELETE FROM degree WHERE ID = ?");
 
                         pstmt.setString(1, request.getParameter("ID"));
                         int rowCount = pstmt.executeUpdate();
@@ -121,7 +121,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Degree");
+                        ("SELECT * FROM degree");
             %>
 
             <!-- Add an HTML table header row to format the results -->
