@@ -2,25 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="226db450-253f-4978-b520-17870c8f7788" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/app.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/class_meetings.jsp" afterPath="$PROJECT_DIR$/class_meetings.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes.jsp" afterPath="$PROJECT_DIR$/classes.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/course_prerequisites.jsp" afterPath="$PROJECT_DIR$/course_prerequisites.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/courses.jsp" afterPath="$PROJECT_DIR$/courses.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/class.sql" afterPath="$PROJECT_DIR$/create_table_queries/class.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/classMeeting.sql" afterPath="$PROJECT_DIR$/create_table_queries/classMeeting.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/course.sql" afterPath="$PROJECT_DIR$/create_table_queries/course.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/courseprerequisite.sql" afterPath="$PROJECT_DIR$/create_table_queries/courseprerequisite.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/singleMeeting.sql" afterPath="$PROJECT_DIR$/create_table_queries/singleMeeting.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/weeklymeeting.sql" afterPath="$PROJECT_DIR$/create_table_queries/weeklymeeting.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/singlemeetings.jsp" afterPath="$PROJECT_DIR$/singlemeetings.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weeklymeetings.jsp" afterPath="$PROJECT_DIR$/weeklymeetings.jsp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/class_enrollment.jsp" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_table_queries/classEnrollment.sql" afterPath="$PROJECT_DIR$/create_table_queries/classEnrollment.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu.html" afterPath="$PROJECT_DIR$/menu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_classes.html" afterPath="$PROJECT_DIR$/menu_classes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_courses.html" afterPath="$PROJECT_DIR$/menu_courses.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_degrees.html" afterPath="$PROJECT_DIR$/menu_degrees.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_expanded.html" afterPath="$PROJECT_DIR$/menu_expanded.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_students.html" afterPath="$PROJECT_DIR$/menu_students.html" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,21 +40,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="singleMeeting.sql" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/create_table_queries/singleMeeting.sql">
+      <file leaf-file-name="classEnrollment.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/create_table_queries/classEnrollment.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38">
-              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="singlemeetings.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/singlemeetings.jsp">
+      <file leaf-file-name="past_class.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/past_class.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6941175">
-              <caret line="240" column="33" selection-start-line="240" selection-start-column="33" selection-end-line="240" selection-end-column="33" />
+            <state vertical-scroll-proportion="-39.788235">
+              <caret line="181" column="8" selection-start-line="181" selection-start-column="8" selection-end-line="181" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -91,6 +80,15 @@
         <option value="$PROJECT_DIR$/weeklymeetings.jsp" />
         <option value="$PROJECT_DIR$/singlemeetings.jsp" />
         <option value="$PROJECT_DIR$/create_table_queries/singleMeeting.sql" />
+        <option value="$PROJECT_DIR$/class_enrollment.jsp" />
+        <option value="$PROJECT_DIR$/create_table_queries/classEnrollment.sql" />
+        <option value="$PROJECT_DIR$/menu_classes.html" />
+        <option value="$PROJECT_DIR$/menu.html" />
+        <option value="$PROJECT_DIR$/menu_courses.html" />
+        <option value="$PROJECT_DIR$/menu_degrees.html" />
+        <option value="$PROJECT_DIR$/menu_expanded.html" />
+        <option value="$PROJECT_DIR$/menu_students.html" />
+        <option value="$PROJECT_DIR$/past_class.jsp" />
       </list>
     </option>
   </component>
@@ -258,14 +256,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/create_table_queries/course.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34545454">
-          <caret line="10" column="24" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/courses.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-35.607143">
@@ -322,14 +312,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8235294">
-          <caret line="77" column="83" selection-start-line="77" selection-start-column="81" selection-end-line="77" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/create_table_queries/weeklymeeting.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3109091">
@@ -350,6 +332,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38">
           <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8235294">
+          <caret line="77" column="83" selection-start-line="77" selection-start-column="81" selection-end-line="77" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu_classes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8235294">
+          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu_students.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu_expanded.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83716476">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_table_queries/course.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10363636">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu_degrees.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6915709">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu_courses.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.455914">
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/past_class.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-39.788235">
+          <caret line="181" column="8" selection-start-line="181" selection-start-column="8" selection-end-line="181" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_table_queries/classEnrollment.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="6" />
           <folding />
         </state>
       </provider>

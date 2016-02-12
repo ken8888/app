@@ -48,18 +48,19 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO ClassEnrollment VALUES (?, ?, ?, ?, ?, ?, ?);" );
+                            "INSERT INTO pastclass VALUES (?, ?, ?, ?, ?, ?, ?);" );
  
+
+
+                        pstmt.setString(1, request.getParameter("student_id"));
                         pstmt.setInt(
-                                1, Integer.parseInt(request.getParameter("ENTRY")));
-                        pstmt.setString(2, request.getParameter("STUDENTID"));
-                        pstmt.setInt(
-                                3, Integer.parseInt(request.getParameter("SECTIONID")));
-                        pstmt.setString(4, request.getParameter("TERM"));
-                        pstmt.setString(5, request.getParameter("GRADE"));
+                                2, Integer.parseInt(request.getParameter("section_id")));
+                        pstmt.setString(3, request.getParameter("term"));
+                        pstmt.setString(4, request.getParameter("grade_type"));
                         pstmt.setString(
-                                6,request.getParameter("UNITS"));
-                        pstmt.setString(7, request.getParameter("GRADERECEIVED"));
+                                5,request.getParameter("units"));
+                        pstmt.setString(6, request.getParameter("grade_received"));
+                        pstmt.setString(7, request.getParameter("course_number"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -79,18 +80,18 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE ClassEnrollment SET STUDENTID = ?, SECTIONID = ?," +
-                            "TERM = ?, GRADE = ?, UNITS = ?, GRADERECEIVED = ? WHERE ENTRY = ?;");
-                        pstmt.setString(1, request.getParameter("STUDENTID"));
+                            "UPDATE pastclass SET student_id = ?, section_id = ?," +
+                            "term = ?, grade_type = ?, units = ?, grade_received = ?, course_number = ? WHERE student_id = ?;");
+                        pstmt.setString(1, request.getParameter("student_id"));
                         pstmt.setInt(
-                                2, Integer.parseInt(request.getParameter("SECTIONID")));
-                        pstmt.setString(3, request.getParameter("TERM"));                        
-                        pstmt.setString(4, request.getParameter("GRADE"));
+                                2, Integer.parseInt(request.getParameter("section_id")));
+                        pstmt.setString(3, request.getParameter("term"));                        
+                        pstmt.setString(4, request.getParameter("grade_type"));
                         pstmt.setString(
-                                5, request.getParameter("UNITS"));
-                        pstmt.setString(6, request.getParameter("GRADERECEIVED"));
-                        pstmt.setInt(
-                                7, Integer.parseInt(request.getParameter("ENTRY")));
+                                5, request.getParameter("units"));
+                        pstmt.setString(6, request.getParameter("grade_received"));
+                        pstmt.setString(7, request.getParameter("course_number"));
+                         pstmt.setString(8, request.getParameter("student_id"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -110,10 +111,9 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM ClassEnrollment WHERE ENTRY = ?;");
+                            "DELETE FROM pastclass WHERE student_id = ?;");
 
-                        pstmt.setInt(
-                        		1, Integer.parseInt(request.getParameter("ENTRY")));
+                         pstmt.setString(1, request.getParameter("student_id"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -130,30 +130,31 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM ClassEnrollment");
+                        ("SELECT * FROM pastclass");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Entry</th>
+
                         <th>Student ID</th>
+                         <th>Course Number</th>
                         <th>Section ID</th>
                         <th>Term</th>
-                        <th>Grade</th>
+                        <th>Grade Type</th>
                         <th>Units</th>
                         <th>Grade Received</th>
                     </tr>
                     <tr>
-                        <form action="class_enrollment.jsp" method="get">
+                        <form action="past_class.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="ENTRY" size="5"></th>
-                            <th><input value="" name="STUDENTID" size="10"></th>
-                            <th><input value="" name="SECTIONID" size="10"></th>
-                            <th><input value="" name="TERM" size="5"></th>
-                            <th><input value="" name="GRADE" size="5"></th>
-                            <th><input value="" name="UNITS" size="5"></th>
-                            <th><input value="" name="GRADERECEIVED" size="5"></th>
+                            <th><input value="" name="student_id" size="10"></th>
+    <th><input value="" name="course_number" size="10"></th>
+                            <th><input value="" name="section_id" size="10"></th>
+                            <th><input value="" name="term" size="5"></th>
+                            <th><input value="" name="grade_type" size="5"></th>
+                            <th><input value="" name="units" size="5"></th>
+                            <th><input value="" name="grade_received" size="5"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -167,49 +168,50 @@
             %>
 
                     <tr>
-                        <form action="class_enrollment.jsp" method="get">
+                        <form action="past_class.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the ID --%>
-                            <td>
-                                <input value="<%= rs.getInt("ENTRY") %>" 
-                                    name="ENTRY" size="5">
-                            </td>
+
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("STUDENTID") %>" 
-                                    name="STUDENTID" size="10">
+                                <input value="<%= rs.getString("student_id") %>" 
+                                    name="student_id" size="10">
                             </td>
+
+    <td>
+    <input value="<%= rs.getString("course_number") %>"
+    name="course_number" size="10">
+    </td>
     
                             <%-- Get the ID --%>
                             <td>
-                                <input value="<%= rs.getInt("SECTIONID") %>" 
-                                    name="SECTIONID" size="10">
+                                <input value="<%= rs.getInt("section_id") %>" 
+                                    name="section_id" size="10">
                             </td>
                             
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("TERM") %>" 
-                                    name="TERM" size="5">
+                                <input value="<%= rs.getString("term") %>" 
+                                    name="term" size="5">
                             </td>
                             
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("GRADE") %>" 
-                                    name="GRADE" size="5">
+                                <input value="<%= rs.getString("grade_type") %>" 
+                                    name="grade_type" size="5">
                             </td>
                             
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("UNITS") %>" 
-                                    name="UNITS" size="5">
+                                <input value="<%= rs.getInt("units") %>" 
+                                    name="units" size="5">
                             </td>
                             
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("GRADERECEIVED") %>" 
-                                    name="GRADERECEIVED" size="5">
+                                <input value="<%= rs.getString("grade_received") %>" 
+                                    name="grade_received" size="5">
                             </td>
     
                             <%-- Button --%>
@@ -217,10 +219,10 @@
                                 <input type="submit" value="Update">
                             </td>
                         </form>
-                        <form action="class_enrollment.jsp" method="get">
+                        <form action="past_class.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("ENTRY") %>" name="ENTRY">
+                                value="<%= rs.getString("student_id") %>" name="student_id">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
