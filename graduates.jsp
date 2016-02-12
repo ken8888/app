@@ -4,6 +4,7 @@
 <html>
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Graduates</title>
 </head>
 
@@ -42,7 +43,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Graduate VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO graduate VALUES (?, ?, ?, ?, ?, ?, ?)");
 
                         pstmt.setString(1, request.getParameter("STUDENTID"));
                         pstmt.setString(2, request.getParameter("DEPTNAME"));
@@ -51,7 +52,9 @@
                         pstmt.setString(5, request.getParameter("IS_CANDIDATE")); 
                         pstmt.setString(6, request.getParameter("CANDIDATE_ADVISOR")); 
                         pstmt.setString(7, request.getParameter("COMMITTEEID")); 
+                        
                         int rowCount = pstmt.executeUpdate();
+                        
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
@@ -62,15 +65,17 @@
             <%
                     // Check if an update is requested
                     if (action != null && action.equals("update")) {
+                        
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Graduate SET DEPTNAME = ?, CLASSIFICATION = ?, " +
+                            "UPDATE graduate SET DEPTNAME = ?, CLASSIFICATION = ?, " +
                             "IS_PRECANDIDATE = ?, IS_CANDIDATE = ?, CANDIDATE_ADVISOR = ?, " +
                             "COMMITTEEID = ? WHERE STUDENTID = ?");
+                        
                         pstmt.setString(1, request.getParameter("DEPTNAME"));
                         pstmt.setString(2, request.getParameter("CLASSIFICATION"));
                         pstmt.setString(3, request.getParameter("IS_PRECANDIDATE"));
@@ -78,9 +83,11 @@
                         pstmt.setString(5, request.getParameter("CANDIDATE_ADVISOR"));
                         pstmt.setString(6, request.getParameter("COMMITTEEID")); 
                         pstmt.setString(7, request.getParameter("STUDENTID")); 
+
                         int rowCount = pstmt.executeUpdate();
+                        
                         // Commit transaction
-                         conn.commit();
+                        conn.commit();
                         conn.setAutoCommit(true);
                     }
             %>
@@ -89,15 +96,19 @@
             <%
                     // Check if a delete is requested
                     if (action != null && action.equals("delete")) {
+                        
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Graduate WHERE STUDENTID = ?");
+                            "DELETE FROM graduate WHERE STUDENTID = ?");
+                        
                         pstmt.setString(1, request.getParameter("STUDENTID"));
+                        
                         int rowCount = pstmt.executeUpdate();
+                        
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
@@ -108,10 +119,11 @@
             <%
                     // Create the statement
                     Statement statement = conn.createStatement();
+                    
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Graduate");
+                        ("SELECT * FROM graduate");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -129,10 +141,10 @@
                         <form action="graduates.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="STUDENTID" size="15"></th>
-                            <th><input value="" name="DEPTNAME" size="5"></th>
-                            <th><input value="" name="CLASSIFICATION" size="5"></th>
-                            <th><input value="" name="IS_PRECANDIDATE" size="5"></th>
-                            <th><input value="" name="IS_CANDIDATE" size="5"></th>
+                            <th><input value="" name="DEPTNAME" size="15"></th>
+                            <th><input value="" name="CLASSIFICATION" size="15"></th>
+                            <th><input value="" name="IS_PRECANDIDATE" size="15"></th>
+                            <th><input value="" name="IS_CANDIDATE" size="15"></th>
                             <th><input value="" name="CANDIDATE_ADVISOR" size="15"></th>
                             <th><input value="" name="COMMITTEEID" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -160,25 +172,25 @@
                             <%-- Get the ID --%>
                             <td>
                                 <input value="<%= rs.getString("DEPTNAME") %>" 
-                                    name="DEPTNAME" size="5">
+                                    name="DEPTNAME" size="15">
                             </td>
     
                             <%-- Get the FIRSTNAME --%>
                             <td>
                                 <input value="<%= rs.getString("CLASSIFICATION") %>"
-                                    name="CLASSIFICATION" size="5">
+                                    name="CLASSIFICATION" size="15">
                             </td>
     
                             <%-- Get the MIDDLENAME --%>
                             <td>
                                 <input value="<%= rs.getString("IS_PRECANDIDATE") %>" 
-                                    name="IS_PRECANDIDATE" size="5">
+                                    name="IS_PRECANDIDATE" size="15">
                             </td>
     
                             <%-- Get the LASTNAME --%>
                             <td>
                                 <input value="<%= rs.getString("IS_CANDIDATE") %>" 
-                                    name="IS_CANDIDATE" size="5">
+                                    name="IS_CANDIDATE" size="15">
                             </td>
                             
                             <%-- Get the LASTNAME --%>
@@ -192,12 +204,12 @@
                                 <input value="<%= rs.getString("COMMITTEEID") %>" 
                                     name="COMMITTEEID" size="15">
                             </td>
-    
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
                             </td>
                         </form>
+                        
                         <form action="graduates.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
@@ -207,7 +219,6 @@
                                 <input type="submit" value="Delete">
                             </td>
                         </form>
-                    </tr>
             <%
                     }
             %>
