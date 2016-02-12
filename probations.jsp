@@ -32,8 +32,8 @@
 
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
-						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
-						"ken", "ken");
+						"jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+						"sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -48,7 +48,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Probation VALUES (?, ?, ?, ?, ?)");
+                            "INSERT INTO probation VALUES (?, ?, ?, ?, ?)");
  
                         pstmt.setString(1, request.getParameter("ID"));
                         pstmt.setString(2, request.getParameter("STUDENTID"));
@@ -75,7 +75,7 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Probation SET STUDENTID = ?, STARTDATE = ?, " + 
+                            "UPDATE probation SET STUDENTID = ?, STARTDATE = ?, " + 
                             "ENDDATE = ?, REASON = ? WHERE ID = ?");
 
                         pstmt.setString(1, request.getParameter("STUDENTID"));
@@ -102,7 +102,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Probation WHERE ID = ?");
+                            "DELETE FROM probation WHERE ID = ?");
 
                         pstmt.setString(1, request.getParameter("ID"));
                         int rowCount = pstmt.executeUpdate();
@@ -121,7 +121,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Probation");
+                        ("SELECT * FROM probation");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -157,31 +157,31 @@
                         <form action="probations.jsp" method="get">
                             <input type="hidden" value="update" name="action">
 
-                            <%-- Get the SSN, which is a number --%>
+                            <%-- Get the ID, which is a number --%>
                             <td>
                                 <input value="<%= rs.getString("ID") %>" 
                                     name="ID" size="10">
                             </td>
 
-                            <%-- Get the SSN, which is a number --%>
+                            <%-- Get the Student ID --%>
                             <td>
                                 <input value="<%= rs.getString("STUDENTID") %>" 
                                     name="STUDENTID" size="10">
                             </td>
 
-                            <%-- Get the SSN, which is a number --%>
+                            <%-- Get the Start Date --%>
                             <td>
                                 <input value="<%= rs.getString("STARTDATE") %>" 
                                     name="STARTDATE" size="15">
                             </td>
     
-                            <%-- Get the ID --%>
+                            <%-- Get the End Date --%>
                             <td>
                                 <input value="<%= rs.getString("ENDDATE") %>" 
                                     name="ENDDATE" size="15">
                             </td>
                             
-                            <%-- Get the ID --%>
+                            <%-- Get the REASON --%>
                             <td>
                                 <input value="<%= rs.getString("REASON") %>" 
                                     name="REASON" size="20">
