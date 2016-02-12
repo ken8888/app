@@ -48,24 +48,18 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO SingleMeeting VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO SingleMeeting VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
  
                         pstmt.setInt(
-                                1, Integer.parseInt(request.getParameter("ID")));
-                        pstmt.setString(2, request.getParameter("TYPE"));
-                        pstmt.setString(3, request.getParameter("BUILDING"));
-                        pstmt.setString(4, request.getParameter("ROOM"));
-                        pstmt.setString(5, request.getParameter("START_TIME"));
-                        pstmt.setString(6, request.getParameter("END_TIME"));
-                        pstmt.setString(7, request.getParameter("ATTENDANCE"));
-                        pstmt.setString(8, request.getParameter("DATE"));
-                        pstmt.setString(9, request.getParameter("MONDAY"));
-                        pstmt.setString(10, request.getParameter("TUESDAY"));
-                        pstmt.setString(11, request.getParameter("WEDNESDAY"));
-                        pstmt.setString(12, request.getParameter("THURSDAY"));
-                        pstmt.setString(13, request.getParameter("FRIDAY"));
-                        pstmt.setString(14, request.getParameter("SATURDAY"));
-                        pstmt.setString(15, request.getParameter("SUNDAY"));
+                                1, Integer.parseInt(request.getParameter("meetingid")));
+                        pstmt.setString(2, request.getParameter("meeting_type"));
+                        pstmt.setString(3, request.getParameter("building_name"));
+                        pstmt.setString(4, request.getParameter("room_number"));
+                        pstmt.setString(5, request.getParameter("start_time"));
+                        pstmt.setString(6, request.getParameter("end_time"));
+                        pstmt.setString(7, request.getParameter("attendance"));
+                        pstmt.setString(8, request.getParameter("_date"));
+
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -75,7 +69,7 @@
                     }
             %>
 
-            <%-- -------- UPDATE Code -------- --%>
+            <%-- -------- UPdate Code -------- --%>
             <%
                     // Check if an update is requested
                     if (action != null && action.equals("update")) {
@@ -84,29 +78,22 @@
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
-                        // UPDATE the student attributes in the Student table.
+                        // UPdate the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE WeeklyMeeting SET TYPE = ?, BUILDING = ?, ROOM = ?, " + 
-                            "START_TIME = ?, END_TIME = ?, ATTENDANCE = ?, DATE = ?, " +
-                            "MONDAY = ?, TUESDAY = ?, WEDNESDAY = ?, THURSDAY = ?, FRIDAY = ?, " +
-                            "SATURDAY = ?, SUNDAY = ? WHERE ID = ?");
+                            "UPdate WeeklyMeeting SET meeting_type = ?, building_name = ?, room_number = ?, " + 
+                            "start_time = ?, end_time = ?, attendance = ?, _date = ? " +
+                            " WHERE meetingid = ?");
 
-                        pstmt.setString(1, request.getParameter("TYPE"));
-                        pstmt.setString(2, request.getParameter("BUILDING"));
-                        pstmt.setString(3, request.getParameter("ROOM"));
-                        pstmt.setString(4, request.getParameter("START_TIME"));
-                        pstmt.setString(5, request.getParameter("END_TIME"));
-                        pstmt.setString(6, request.getParameter("ATTENDANCE"));
-                        pstmt.setString(7, request.getParameter("DATE"));
-                        pstmt.setString(8, request.getParameter("MONDAY"));
-                        pstmt.setString(9, request.getParameter("TUESDAY"));
-                        pstmt.setString(10, request.getParameter("WEDNESDAY"));
-                        pstmt.setString(11, request.getParameter("THURSDAY"));
-                        pstmt.setString(12, request.getParameter("FRIDAY"));
-                        pstmt.setString(13, request.getParameter("SATURDAY"));
-                        pstmt.setString(14, request.getParameter("SUNDAY"));
+                        pstmt.setString(1, request.getParameter("meeting_type"));
+                        pstmt.setString(2, request.getParameter("building_name"));
+                        pstmt.setString(3, request.getParameter("room_number"));
+                        pstmt.setString(4, request.getParameter("start_time"));
+                        pstmt.setString(5, request.getParameter("end_time"));
+                        pstmt.setString(6, request.getParameter("attendance"));
+                        pstmt.setString(7, request.getParameter("_date"));
+
                         pstmt.setInt(
-                                15, Integer.parseInt(request.getParameter("ID")));
+                                8, Integer.parseInt(request.getParameter("meetingid")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -126,10 +113,10 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM SingleMeeting WHERE ID = ?");
+                            "DELETE FROM SingleMeeting WHERE meetingid = ?");
 
                         pstmt.setInt(
-                                1, Integer.parseInt(request.getParameter("ID")));
+                                1, Integer.parseInt(request.getParameter("meetingid")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -160,32 +147,20 @@
                         <th>End Time</th>
                         <th>Attendance</th>
                         <th>Date</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
+
                     </tr>
                     <tr>
                         <form action="singlemeetings.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="ID" size="10"></th>
-                            <th><input value="" name="TYPE" size="5"></th>
-                            <th><input value="" name="BUILDING" size="5"></th>
-                            <th><input value="" name="ROOM" size="5"></th>
-                            <th><input value="" name="START_TIME" size="10"></th>
-                            <th><input value="" name="END_TIME" size="10"></th>
-                            <th><input value="" name="ATTENDANCE" size="10"></th>
-                            <th><input value="" name="DATE" size="10"></th>
-                            <th><input value="" name="MONDAY" size="5"></th>
-                            <th><input value="" name="TUESDAY" size="5"></th>
-                            <th><input value="" name="WEDNESDAY" size="5"></th>
-                            <th><input value="" name="THURSDAY" size="5"></th>
-                            <th><input value="" name="FRIDAY" size="5"></th>
-                            <th><input value="" name="SATURDAY" size="5"></th>
-                            <th><input value="" name="SUNDAY" size="5"></th>
+                            <th><input value="" name="meetingid" size="10"></th>
+                            <th><input value="" name="meeting_type" size="5"></th>
+                            <th><input value="" name="building_name" size="5"></th>
+                            <th><input value="" name="room_number" size="5"></th>
+                            <th><input value="" name="start_time" size="10"></th>
+                            <th><input value="" name="end_time" size="10"></th>
+                            <th><input value="" name="attendance" size="10"></th>
+                            <th><input value="" name="_date" size="10"></th>
+
 
                             <th><input type="submit" value="Insert"></th>
                         </form>
@@ -205,94 +180,52 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("ID") %>" 
-                                    name="ID" size="10">
+                                <input value="<%= rs.getInt("meetingid") %>" 
+                                    name="meetingid" size="10">
                             </td>
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("TYPE") %>" 
-                                    name="TYPE" size="5">
+                                <input value="<%= rs.getString("meeting_type") %>" 
+                                    name="meeting_type" size="5">
                             </td>
     
                             <%-- Get the ID --%>
                             <td>
-                                <input value="<%= rs.getString("BUILDING") %>" 
-                                    name="BUILDING" size="5">
+                                <input value="<%= rs.getString("building_name") %>" 
+                                    name="building_name" size="5">
                             </td>
                             
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("ROOM") %>" 
-                                    name="ROOM" size="5">
+                                <input value="<%= rs.getString("room_number") %>" 
+                                    name="room_number" size="5">
                             </td>
     
                             <%-- Get the ID --%>
                             <td>
-                                <input value="<%= rs.getString("START_TIME") %>" 
-                                    name="START_TIME" size="10">
+                                <input value="<%= rs.getString("start_time") %>" 
+                                    name="start_time" size="10">
                             </td>
                             
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("END_TIME") %>" 
-                                    name="END_TIME" size="10">
+                                <input value="<%= rs.getString("end_time") %>" 
+                                    name="end_time" size="10">
                             </td>
     
                             <%-- Get the ID --%>
                             <td>
-                                <input value="<%= rs.getString("ATTENDANCE") %>" 
-                                    name="ATTENDANCE" size="10">
+                                <input value="<%= rs.getString("attendance") %>" 
+                                    name="attendance" size="10">
                             </td>
     
                             <%-- Get the ID --%>
                             <td>
-                                <input value="<%= rs.getString("DATE") %>" 
-                                    name="END_DATE" size="10">
+                                <input value="<%= rs.getString("_date") %>"
+                                    name="_date" size="10">
                             </td>
-                            
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("MONDAY") %>" 
-                                    name="MONDAY" size="5">
-                            </td>
-    
-                            <%-- Get the ID --%>
-                            <td>
-                                <input value="<%= rs.getString("TUESDAY") %>" 
-                                    name="TUESDAY" size="5">
-                            </td>
-                            
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("WEDNESDAY") %>" 
-                                    name="WEDNESDAY" size="5">
-                            </td>
-    
-                            <%-- Get the ID --%>
-                            <td>
-                                <input value="<%= rs.getString("THURSDAY") %>" 
-                                    name="THURSDAY" size="5">
-                            </td>
-                            
-                            <%-- Get the ID --%>
-                            <td>
-                                <input value="<%= rs.getString("FRIDAY") %>" 
-                                    name="FRIDAY" size="5">
-                            </td>
-                            
-                            <%-- Get the SSN, which is a number --%>
-                            <td>
-                                <input value="<%= rs.getString("SATURDAY") %>" 
-                                    name="SATURDAY" size="5">
-                            </td>
-    
-                            <%-- Get the ID --%>
-                            <td>
-                                <input value="<%= rs.getString("SUNDAY") %>" 
-                                    name="SUNDAY" size="5">
-                            </td>
-    
+
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">
@@ -301,7 +234,7 @@
                         <form action="singlemeetings.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("ID") %>" name="ID">
+                                value="<%= rs.getInt("meetingid") %>" name="meetingid">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

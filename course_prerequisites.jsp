@@ -50,8 +50,8 @@
                         PreparedStatement pstmt = conn.prepareStatement(
                             "INSERT INTO CoursePrerequisite VALUES (?, ?)");
  
-                        pstmt.setString(1, request.getParameter("COURSETITLE"));
-                        pstmt.setString(2, request.getParameter("PREREQUISITE"));
+                        pstmt.setString(1, request.getParameter("coursenumber"));
+                        pstmt.setString(2, request.getParameter("pre_course_number"));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -72,10 +72,10 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE CoursePrerequisite SET PREREQUISITE = ? WHERE COURSETITLE = ?");
+                            "UPDATE CoursePrerequisite SET pre_course_number = ? WHERE coursenumber = ?");
 
-                        pstmt.setString(1, request.getParameter("PREREQUISITE"));
-                        pstmt.setString(2, request.getParameter("COURSETITLE"));
+                        pstmt.setString(1, request.getParameter("pre_course_number"));
+                        pstmt.setString(2, request.getParameter("coursenumber"));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -96,10 +96,10 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM CoursePrerequisite WHERE COURSETITLE = ? AND PREREQUISITE = ?");
+                            "DELETE FROM CoursePrerequisite WHERE coursenumber = ? AND pre_course_number = ?");
 
-                        pstmt.setString(1, request.getParameter("COURSETITLE"));
-                        pstmt.setString(2, request.getParameter("PREREQUISITE"));
+                        pstmt.setString(1, request.getParameter("coursenumber"));
+                        pstmt.setString(2, request.getParameter("pre_course_number"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -128,8 +128,8 @@
                     <tr>
                         <form action="course_prerequisites.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="COURSETITLE" size="20"></th>
-                            <th><input value="" name="PREREQUISITE" size="20"></th>
+                            <th><input value="" name="coursenumber" size="20"></th>
+                            <th><input value="" name="pre_course_number" size="20"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -148,28 +148,33 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("COURSETITLE") %>" 
-                                    name="COURSETITLE" size="20">
+                                <input value="<%= rs.getString("coursenumber") %>" 
+                                    name="coursenumber" size="20">
                             </td>
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("PREREQUISITE") %>" 
-                                    name="PREREQUISITE" size="20">
+                                <input value="<%= rs.getString("pre_course_number") %>" 
+                                    name="pre_course_number" size="20">
+                            </td>
+
+                            <%-- Button --%>
+                            <td>
+                            <input type="submit" value="Update">
                             </td>
     
                         </form>
-                        <form action="course_prerequisites.jsp" method="get">
-                            <input type="hidden" value="delete" name="action">
-                            <input type="hidden" 
-                                value="<%= rs.getString("COURSETITLE") %>" name="COURSETITLE">
-                            <input type="hidden" 
-                                value="<%= rs.getString("PREREQUISITE") %>" name="PREREQUISITE">
-                            <%-- Button --%>
-                            <td>
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
+    <form action="course_prerequisites.jsp" method="get">
+    <input type="hidden" value="delete" name="action">
+    <input type="hidden"
+    value="<%= rs.getString("coursenumber") %>" name="coursenumber">
+    <input type="hidden"
+    value="<%= rs.getString("pre_course_number") %>" name="pre_course_number">
+    <%-- Button --%>
+    <td>
+    <input type="submit" value="Delete">
+    </td>
+    </form>
                     </tr>
             <%
                     }

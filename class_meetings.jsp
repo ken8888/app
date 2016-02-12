@@ -48,12 +48,12 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO ClassMeeting VALUES (?, ?)");
+                            "INSERT INTO classMeeting VALUES (?, ?)");
  
                         pstmt.setInt(
-                                1, Integer.parseInt(request.getParameter("SECTIONID")));
+                                1, Integer.parseInt(request.getParameter("sectionid")));
                         pstmt.setInt(
-                                2, Integer.parseInt(request.getParameter("MEETINGID")));
+                                2, Integer.parseInt(request.getParameter("meetingid")));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -74,12 +74,12 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE ClassMeeting SET MEETINGID = ? WHERE SECTIONID = ?");
+                            "UPDATE classMeeting SET meetingid = ? WHERE sectionid = ?");
 
                         pstmt.setInt(
-                                1, Integer.parseInt(request.getParameter("MEETINGID")));
+                                1, Integer.parseInt(request.getParameter("meetingid")));
                         pstmt.setInt(
-                                2, Integer.parseInt(request.getParameter("SECTIONID")));
+                                2, Integer.parseInt(request.getParameter("sectionid")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -99,12 +99,12 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM ClassMeeting WHERE SECTIONID = ? AND MEETINGID = ?");
+                            "DELETE FROM classMeeting WHERE sectionid = ? AND meetingid = ?");
 
                         pstmt.setInt(
-                                1, Integer.parseInt(request.getParameter("SECTIONID")));
+                                1, Integer.parseInt(request.getParameter("sectionid")));
                         pstmt.setInt(
-                                2, Integer.parseInt(request.getParameter("MEETINGID")));
+                                2, Integer.parseInt(request.getParameter("meetingid")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -121,7 +121,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM ClassMeeting");
+                        ("SELECT * FROM classMeeting");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -133,8 +133,8 @@
                     <tr>
                         <form action="class_meetings.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="SECTIONID" size="10"></th>
-                            <th><input value="" name="MEETINGID" size="10"></th>
+                            <th><input value="" name="sectionid" size="10"></th>
+                            <th><input value="" name="meetingid" size="10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -153,23 +153,26 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("SECTIONID") %>" 
-                                    name="SECTIONID" size="10">
+                                <input value="<%= rs.getInt("sectionid") %>" 
+                                    name="sectionid" size="10">
                             </td>
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("MEETINGID") %>" 
-                                    name="MEETINGID" size="10">
+                                <input value="<%= rs.getInt("meetingid") %>" 
+                                    name="meetingid" size="10">
                             </td>
-    
+    <%-- Button --%>
+    <td>
+    <input type="submit" value="Update">
+    </td>
                         </form>
                         <form action="class_meetings.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID">
+                                value="<%= rs.getInt("sectionid") %>" name="sectionid">
                             <input type="hidden" 
-                                value="<%= rs.getInt("MEETINGID") %>" name="MEETINGID">
+                                value="<%= rs.getInt("meetingid") %>" name="meetingid">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
