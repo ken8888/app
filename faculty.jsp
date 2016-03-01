@@ -42,13 +42,11 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO faculty VALUES (?, ?, ?, ?, ?)");
+                            "INSERT INTO faculty VALUES (?, ?, ?)");
 
-                        pstmt.setString(1, request.getParameter("LASTNAME"));
-                        pstmt.setString(2, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(3, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(4, request.getParameter("TITLE"));
-                        pstmt.setString(5, request.getParameter("DEPTNAME"));   
+                        pstmt.setString(1, request.getParameter("NAME"));;
+                        pstmt.setString(2, request.getParameter("TITLE"));
+                        pstmt.setString(3, request.getParameter("DEPTNAME"));
                         int rowCount = pstmt.executeUpdate();
                         // Commit transaction
                         conn.commit();
@@ -66,13 +64,10 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE faculty SET FIRSTNAME = ?, MIDDLENAME = ?, " +
-                            "TITLE = ?, DEPTNAME = ? WHERE LASTNAME = ?");
-                        pstmt.setString(1, request.getParameter("FIRSTNAME"));
-                        pstmt.setString(2, request.getParameter("MIDDLENAME"));
-                        pstmt.setString(3, request.getParameter("TITLE"));
-                        pstmt.setString(4, request.getParameter("DEPTNAME"));
-                        pstmt.setString(5, request.getParameter("LASTNAME"));
+                            "UPDATE faculty SET TITLE = ?, DEPTNAME = ? WHERE NAME = ?");
+                        pstmt.setString(1, request.getParameter("TITLE"));
+                        pstmt.setString(2, request.getParameter("DEPTNAME"));
+                        pstmt.setString(3, request.getParameter("LASTNAME"));
                         int rowCount = pstmt.executeUpdate();
                         // Commit transaction
                          conn.commit();
@@ -90,8 +85,8 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM faculty WHERE LASTNAME = ?");
-                        pstmt.setString(1, request.getParameter("LASTNAME"));
+                            "DELETE FROM faculty WHERE NAME = ?");
+                        pstmt.setString(1, request.getParameter("NAME"));
                         int rowCount = pstmt.executeUpdate();
                         // Commit transaction
                         conn.commit();
@@ -112,18 +107,14 @@
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
+                        <th>Name</th>
                         <th>Title</th>
                         <th>Dept</th>
                     </tr>
                     <tr>
                         <form action="faculty.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="LASTNAME" size="15"></th>
-                            <th><input value="" name="FIRSTNAME" size="15"></th>
-                            <th><input value="" name="MIDDLENAME" size="15"></th>
+                            <th><input value="" name="NAME" size="15"></th>
                             <th><input value="" name="TITLE" size="15"></th>
                             <th><input value="" name="DEPTNAME" size="5"></th>
                             <th><input type="submit" value="Insert"></th>
@@ -144,22 +135,10 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("LASTNAME") %>" 
-                                    name="LASTNAME" size="15">
+                                <input value="<%= rs.getString("NAME") %>"
+                                    name="NAME" size="15">
                             </td>
-    
-                            <%-- Get the ID --%>
-                            <td>
-                                <input value="<%= rs.getString("FIRSTNAME") %>" 
-                                    name="FIRSTNAME" size="15">
-                            </td>
-    
-                            <%-- Get the FIRSTNAME --%>
-                            <td>
-                                <input value="<%= rs.getString("MIDDLENAME") %>"
-                                    name="MIDDLENAME" size="15">
-                            </td>
-    
+
                             <%-- Get the MIDDLENAME --%>
                             <td>
                                 <input value="<%= rs.getString("TITLE") %>" 
@@ -169,7 +148,7 @@
                             <%-- Get the LASTNAME --%>
                             <td>
                                 <input value="<%= rs.getString("DEPTNAME") %>" 
-                                    name="DEPTNAME" size="5">
+                                    name="DEPTNAME" size="15">
                             </td>
     
                             <%-- Button --%>
@@ -180,7 +159,7 @@
                         <form action="faculty.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getString("LASTNAME") %>" name="LASTNAME">
+                                value="<%= rs.getString("NAME") %>" name="LASTNAME">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">

@@ -53,14 +53,15 @@
 
 
                         pstmt.setString(1, request.getParameter("student_id"));
+                        pstmt.setString(2, request.getParameter("course_number"));
                         pstmt.setInt(
-                                2, Integer.parseInt(request.getParameter("section_id")));
-                        pstmt.setString(3, request.getParameter("term"));
-                        pstmt.setString(4, request.getParameter("grade_type"));
+                                3, Integer.parseInt(request.getParameter("section_id")));
+                        pstmt.setString(4, request.getParameter("term"));
+                        pstmt.setString(5, request.getParameter("grade_type"));
                         pstmt.setString(
-                                5,request.getParameter("units"));
-                        pstmt.setString(6, request.getParameter("grade_received"));
-                        pstmt.setString(7, request.getParameter("course_number"));
+                                6,request.getParameter("units"));
+                        pstmt.setString(7, request.getParameter("grade_received"));
+
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction

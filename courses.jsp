@@ -139,7 +139,7 @@
                             <th><input value="" name="department" size="5"></th>
                             <th><input value="" name="coursenumber" size="5"></th>
                             <th><input value="" name="units" size="5"></th>
-                            <th><input value="" name="gradetype" size="20"></th>
+                            <th><input value="" name="gradetype" size="5"></th>
                             <th><input value="" name="division" size="5"></th>
                             <th><input value="" name="consent" size="5"></th>
                             <th><input value="" name="lab" size="5"></th>
@@ -184,8 +184,8 @@
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                            <input value="<%= rs.getString("gradetype") %>"
-                            name="gradetype" size="20">
+                                <input value="<%= rs.getString("gradetype") %>"
+                                name="gradetype" size="5">
                             </td>
 
                             <%-- Get the ID --%>
