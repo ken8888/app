@@ -16,7 +16,7 @@
 
 <html>
     <head>
-        <title>Graduate Student's Remaining Requirements</title>
+        <title>Scheduling a review session</title>
         <script type="text/JavaScript"> 
             function handleSelect(form_classes_by_student){
                 var selIndex = form_classes_by_student.selected.selectedIndex;
@@ -31,11 +31,11 @@
         try{
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             pstmt = connection.prepareStatement(
-            "SELECT DISTINCT x.studentid"
-            + " FROM graduate x, studentenrollment y"
+            "SELECT DISTINCT x.sectionid"
+            + " FROM class x"
             + " WHERE"
-            + " y.studentid = x.studentid"
-            + " AND x.classification = 'MS'");
+            + " x.term = 'SP09'"
+            );
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -48,17 +48,16 @@
 
         %>
 
-        <h1>Display degree requirements for ALL MS Students</h1>
-        <h4>(because there was only one, we didn't limit to just Spring 2009</h4> 
+        <h1>Scheduling a review session for a class</h1>
         <div style = "width:100%">
         
             <div style = "float:left; width:20%;">
                 <%-- -------- Include menu HTML code -------- --%>
-                <jsp:include page="../menu.html" />
+                <jsp:include page="menu.html" />
             </div>
         
             <div style = "float:left; width:80%;">
-                <form name="form_classes_by_student" action="display_ms_requirements.jsp" method="POST">
+                <form name="form_classes_by_student" action="display_scheduling_review.jsp" method="POST">
                         <table border="1">
                         <tbody>
                           <%--  <tr>   
@@ -67,11 +66,11 @@
                             </tr>
                             --%>  
                             <tr>   
-                                <td>Students enrolled</td>
+                                <td>Section ID of current quarter</td>
                                 <td><select name="selected" onchange="handleSelect(this.form)"> 
                                     <% while (resultset.next()){ %>
                                     <option>
-                                        <%= resultset.getString("studentid") %>
+                                        <%= resultset.getInt("sectionid") %>
                                     </option>
                                     <% } %>
                                 </select></td>

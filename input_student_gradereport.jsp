@@ -16,11 +16,11 @@
 
 <html>
     <head>
-        <title>Undergraduate Student's Remaining Requirements</title>
+        <title>Student's Grade Report</title>
         <script type="text/JavaScript"> 
-            function handleSelect(form_classes_by_student){
-                var selIndex = form_classes_by_student.selected.selectedIndex;
-                var selName = form_classes_by_student.selected.options[selIndex].text;
+            function handleSelect(form_student_gradereport){
+                var selIndex = form_student_gradereport.selected.selectedIndex;
+                var selName = form_student_gradereport.selected.options[selIndex].text;
                 document.getElementById("ID").value = selName;
             }
         </script> 
@@ -31,10 +31,9 @@
         try{
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             pstmt = connection.prepareStatement(
-            "SELECT DISTINCT x.studentid"
-            + " FROM undergraduate x, studentenrollment y"
-            + " WHERE y.term = 'SP09'"
-            + " AND y.studentid = x.studentid");
+            "SELECT DISTINCT x.id"
+            + " FROM Student x, ClassEnrollment y"
+            + " WHERE y.studentid = x.id");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -47,17 +46,17 @@
 
         %>
 
-        <h1>Display degree requirements for Undergraduate Students</h1>
+        <h1>Display the student's classes and GPA</h1>
         
         <div style = "width:100%">
         
             <div style = "float:left; width:20%;">
                 <%-- -------- Include menu HTML code -------- --%>
-                <jsp:include page="../menu.html" />
+                <jsp:include page="menu.html" />
             </div>
         
             <div style = "float:left; width:80%;">
-                <form name="form_classes_by_student" action="display_undergrad_requirements.jsp" method="POST">
+                <form name="form_student_gradereport" action="display_student_gradereport.jsp" method="POST">
                         <table border="1">
                         <tbody>
                           <%--  <tr>   
@@ -66,11 +65,11 @@
                             </tr>
                             --%>  
                             <tr>   
-                                <td>Students enrolled</td>
+                                <td>Students</td>
                                 <td><select name="selected" onchange="handleSelect(this.form)"> 
                                     <% while (resultset.next()){ %>
                                     <option>
-                                        <%= resultset.getString("studentid") %>
+                                        <%= resultset.getString("id") %>
                                     </option>
                                     <% } %>
                                 </select></td>

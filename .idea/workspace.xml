@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="226db450-253f-4978-b520-17870c8f7788" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/class_enrollment.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/display_classes_by_student.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/input_classes_by_student.jsp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu.html" afterPath="$PROJECT_DIR$/menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_classes.html" afterPath="$PROJECT_DIR$/menu_classes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_courses.html" afterPath="$PROJECT_DIR$/menu_courses.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_degrees.html" afterPath="$PROJECT_DIR$/menu_degrees.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_expanded.html" afterPath="$PROJECT_DIR$/menu_expanded.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu_students.html" afterPath="$PROJECT_DIR$/menu_students.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_classes_by_student.jsp" afterPath="$PROJECT_DIR$/report/input_classes_by_student.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_course_gradedistribution.jsp" afterPath="$PROJECT_DIR$/report/input_course_gradedistribution.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_ms_requirements.jsp" afterPath="$PROJECT_DIR$/report/input_ms_requirements.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_roster_of_class.jsp" afterPath="$PROJECT_DIR$/report/input_roster_of_class.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_scheduling_review.jsp" afterPath="$PROJECT_DIR$/report/input_scheduling_review.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_student_classconflict.jsp" afterPath="$PROJECT_DIR$/report/input_student_classconflict.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_student_gradereport.jsp" afterPath="$PROJECT_DIR$/report/input_student_gradereport.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/input_undergrad_requirements.jsp" afterPath="$PROJECT_DIR$/report/input_undergrad_requirements.jsp" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +34,17 @@
       <file leaf-file-name="display_classes_by_student.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/display_classes_by_student.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="-12.892858">
+              <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="display_course_gradedistribution.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/report/display_course_gradedistribution.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="146.39285">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -46,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/report/input_classes_by_student.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-3.4035087">
-              <caret line="58" column="38" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
+              <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -56,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/report/input_course_gradedistribution.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-10.178572">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -66,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/report/input_ms_requirements.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-5.428571">
-              <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -75,8 +84,8 @@
       <file leaf-file-name="input_roster_of_class.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/input_roster_of_class.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.178572">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+            <state vertical-scroll-proportion="-3.5714285">
+              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -85,8 +94,8 @@
       <file leaf-file-name="input_scheduling_review.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/input_scheduling_review.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.892858">
-              <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+            <state vertical-scroll-proportion="-16.285715">
+              <caret line="60" column="2" selection-start-line="60" selection-start-column="2" selection-end-line="60" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -95,28 +104,28 @@
       <file leaf-file-name="input_student_classconflict.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/input_student_classconflict.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.142858">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+            <state vertical-scroll-proportion="-3.5714285">
+              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="input_student_gradereport.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="input_student_gradereport.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/report/input_student_gradereport.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.214286">
-              <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.47841728">
+              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="input_undergrad_requirements.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="input_undergrad_requirements.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/input_undergrad_requirements.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33206832">
-              <caret line="14" column="89" selection-start-line="14" selection-start-column="85" selection-end-line="14" selection-end-column="89" />
+            <state vertical-scroll-proportion="-3.0701754">
+              <caret line="59" column="93" selection-start-line="59" selection-start-column="92" selection-end-line="59" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -168,9 +177,9 @@
         <option value="$PROJECT_DIR$/menu_degrees.html" />
         <option value="$PROJECT_DIR$/menu_expanded.html" />
         <option value="$PROJECT_DIR$/menu_students.html" />
+        <option value="$PROJECT_DIR$/report/input_ms_requirements.jsp" />
         <option value="$PROJECT_DIR$/report/input_classes_by_student.jsp" />
         <option value="$PROJECT_DIR$/report/input_course_gradedistribution.jsp" />
-        <option value="$PROJECT_DIR$/report/input_ms_requirements.jsp" />
         <option value="$PROJECT_DIR$/report/input_roster_of_class.jsp" />
         <option value="$PROJECT_DIR$/report/input_scheduling_review.jsp" />
         <option value="$PROJECT_DIR$/report/input_student_classconflict.jsp" />
@@ -378,13 +387,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/create_table_queries/concentration.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/create_table_queries/degree.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -698,7 +700,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/report/display_classes_by_student.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="-12.892858">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/report/display_course_gradedistribution.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="146.39285">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -707,7 +717,7 @@
     <entry file="file://$PROJECT_DIR$/report/input_classes_by_student.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.4035087">
-          <caret line="58" column="38" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
+          <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -715,7 +725,7 @@
     <entry file="file://$PROJECT_DIR$/report/input_course_gradedistribution.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.178572">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -723,47 +733,47 @@
     <entry file="file://$PROJECT_DIR$/report/input_ms_requirements.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.428571">
-          <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/report/input_roster_of_class.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.178572">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+        <state vertical-scroll-proportion="-3.5714285">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/report/input_scheduling_review.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.892858">
-          <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+        <state vertical-scroll-proportion="-16.285715">
+          <caret line="60" column="2" selection-start-line="60" selection-start-column="2" selection-end-line="60" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/report/input_student_classconflict.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.142858">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/report/input_student_gradereport.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.214286">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+        <state vertical-scroll-proportion="-3.5714285">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/report/input_undergrad_requirements.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33206832">
-          <caret line="14" column="89" selection-start-line="14" selection-start-column="85" selection-end-line="14" selection-end-column="89" />
+        <state vertical-scroll-proportion="-3.0701754">
+          <caret line="59" column="93" selection-start-line="59" selection-start-column="92" selection-end-line="59" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/report/input_student_gradereport.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47841728">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
           <folding />
         </state>
       </provider>
