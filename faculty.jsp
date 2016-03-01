@@ -28,6 +28,7 @@
 
 				Connection conn = DriverManager.getConnection(
                         "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
+
                         "sahmed123", "sahmed123");
             %>
 

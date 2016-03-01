@@ -1,18 +1,21 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-<title>Classes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class Enrollment</title>
 </head>
 
 <body>
+
+
     <table border="1">
         <tr>
             <td valign="top">
                 <%-- -------- Include menu HTML code -------- --%>
-                <jsp:include page="menu_classes.html" />
+                <jsp:include page="menu.html" />
             </td>
             <td>
 
@@ -25,14 +28,12 @@
                 try {
                     // Load PostGreSQL Driver class file
                     DriverManager
-						.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+                        .registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
     
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
-
-						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
-
-						"sahmed123", "sahmed123");
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+                        "sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
@@ -40,26 +41,27 @@
                     String action = request.getParameter("action");
                     // Check if an insertion is requested
                     if (action != null && action.equals("insert")) {
+
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO Class VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO ClassEnrollment VALUES (?, ?, ?, ?, ?, ?, ?)");
  
                         pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("sectionid")));
-                        pstmt.setString(2, request.getParameter("coursetitle"));
-                        pstmt.setString(3, request.getParameter("term"));
-                        pstmt.setString(4, request.getParameter("instructor"));
+                                1, Integer.parseInt(request.getParameter("ENTRY")));
+                        pstmt.setString(2, request.getParameter("STUDENTID"));
                         pstmt.setInt(
-                            5, Integer.parseInt(request.getParameter("enrolled")));
+                                3, Integer.parseInt(request.getParameter("SECTIONID")));
+                        pstmt.setString(4, request.getParameter("TERM"));
+                        pstmt.setString(5, request.getParameter("GRADE"));
                         pstmt.setInt(
-                            6, Integer.parseInt(request.getParameter("seats")));
-                        pstmt.setInt(
-                            7, Integer.parseInt(request.getParameter("waitlist")));
+                                6, Integer.parseInt(request.getParameter("UNITS")));
+                        pstmt.setString(7, request.getParameter("GRADERECEIVED"));
                         int rowCount = pstmt.executeUpdate();
+
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
@@ -70,26 +72,27 @@
             <%
                     // Check if an update is requested
                     if (action != null && action.equals("update")) {
+
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE Class SET course_title = ?, term = ?, instructor = ?, " +
-                            "enrolled = ?, seats = ?, waitlist = ? WHERE SECTION_ID = ?");
-                        pstmt.setString(1, request.getParameter("coursetitle"));
-                        pstmt.setString(2, request.getParameter("term"));
-                        pstmt.setString(3, request.getParameter("instructor"));
+                            "UPDATE ClassEnrollment SET STUDENTID = ?, SECTIONID = ?," +
+                            "TERM = ?, GRADE = ?, UNITS = ?, GRADERECEIVED = ? WHERE ENTRY = ?");
+                        pstmt.setString(1, request.getParameter("STUDENTID"));
                         pstmt.setInt(
-                            4, Integer.parseInt(request.getParameter("enrolled")));
+                                2, Integer.parseInt(request.getParameter("SECTIONID")));
+                        pstmt.setString(3, request.getParameter("TERM"));                        
+                        pstmt.setString(4, request.getParameter("GRADE"));
                         pstmt.setInt(
-                            5, Integer.parseInt(request.getParameter("seats")));
+                                5, Integer.parseInt(request.getParameter("UNITS")));
+                        pstmt.setString(6, request.getParameter("GRADERECEIVED"));
                         pstmt.setInt(
-                            6, Integer.parseInt(request.getParameter("waitlist")));
-                        pstmt.setInt(
-                            7, Integer.parseInt(request.getParameter("sectionid")));
+                                7, Integer.parseInt(request.getParameter("ENTRY")));
                         int rowCount = pstmt.executeUpdate();
+
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
@@ -100,16 +103,19 @@
             <%
                     // Check if a delete is requested
                     if (action != null && action.equals("delete")) {
+
                         // Begin transaction
                         conn.setAutoCommit(false);
                         
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM Class WHERE SECTION_ID = ?");
+                            "DELETE FROM ClassEnrollment WHERE ENTRY = ?");
+
                         pstmt.setInt(
-                            1, Integer.parseInt(request.getParameter("sectionid")));
+                        		1, Integer.parseInt(request.getParameter("ENTRY")));
                         int rowCount = pstmt.executeUpdate();
+
                         // Commit transaction
                         conn.commit();
                         conn.setAutoCommit(true);
@@ -120,34 +126,34 @@
             <%
                     // Create the statement
                     Statement statement = conn.createStatement();
+
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM Class");
+                        ("SELECT * FROM ClassEnrollment");
             %>
 
             <!-- Add an HTML table header row to format the results -->
                 <table border="1">
                     <tr>
+                        <th>Entry</th>
+                        <th>Student ID</th>
                         <th>Section ID</th>
-                        <th>Course Number</th>
                         <th>Term</th>
-                        <th>Instructor</th>
-                        <th>Enrolled</th>
-                        <th>Limit</th>
-                        <th>Waitlist</th>
-                        <th>Action</th>
+                        <th>Grade</th>
+                        <th>Units</th>
+                        <th>Grade Received</th>
                     </tr>
                     <tr>
-                        <form action="classes.jsp" method="get">
+                        <form action="class_enrollment.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
-                            <th><input value="" name="sectionid" size="10"></th>
-                            <th><input value="" name="coursetitle" size="20"></th>
-                            <th><input value="" name="term" size="5"></th>
-                            <th><input value="" name="instructor" size="15"></th>
-                            <th><input value="" name="enrolled" size="5"></th>
-                            <th><input value="" name="seats" size="5"></th>
-                            <th><input value="" name="waitlist" size="5"></th>
+                            <th><input value="" name="ENTRY" size="5"></th>
+                            <th><input value="" name="STUDENTID" size="10"></th>
+                            <th><input value="" name="SECTIONID" size="10"></th>
+                            <th><input value="" name="TERM" size="5"></th>
+                            <th><input value="" name="GRADE" size="5"></th>
+                            <th><input value="" name="UNITS" size="5"></th>
+                            <th><input value="" name="GRADERECEIVED" size="5"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -161,49 +167,49 @@
             %>
 
                     <tr>
-                        <form action="classes.jsp" method="get">
+                        <form action="class_enrollment.jsp" method="get">
                             <input type="hidden" value="update" name="action">
+
+                            <%-- Get the ID --%>
+                            <td>
+                                <input value="<%= rs.getInt("ENTRY") %>" 
+                                    name="ENTRY" size="5">
+                            </td>
 
                             <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("section_id") %>"
-                                    name="sectionid" size="10">
+                                <input value="<%= rs.getString("STUDENTID") %>" 
+                                    name="STUDENTID" size="10">
                             </td>
     
                             <%-- Get the ID --%>
                             <td>
-                                <input value="<%= rs.getString("course_title") %>"
-                                    name="coursetitle" size="20">
+                                <input value="<%= rs.getInt("SECTIONID") %>" 
+                                    name="SECTIONID" size="10">
                             </td>
                             
-                            <%-- Get the ID --%>
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("term") %>"
-                                    name="term" size="5">
+                                <input value="<%= rs.getString("TERM") %>" 
+                                    name="TERM" size="5">
                             </td>
                             
-                            <%-- Get the ID --%>
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getString("instructor") %>"
-                                    name="instructor" size="15">
+                                <input value="<%= rs.getString("GRADE") %>" 
+                                    name="GRADE" size="5">
                             </td>
-    
-                            <%-- Get the FIRSTNAME --%>
+                            
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("enrolled") %>"
-                                    name="enrolled" size="5">
+                                <input value="<%= rs.getInt("UNITS") %>" 
+                                    name="UNITS" size="5">
                             </td>
-    
-                            <%-- Get the MIDDLENAME --%>
+                            
+                            <%-- Get the SSN, which is a number --%>
                             <td>
-                                <input value="<%= rs.getInt("seats") %>"
-                                    name="seats" size="5">
-                            </td>
-    
-                            <%-- Get the LASTNAME --%>
-                            <td>
-                                <input value="<%= rs.getInt("waitlist") %>"
-                                    name="waitlist" size="5">
+                                <input value="<%= rs.getString("GRADERECEIVED") %>" 
+                                    name="GRADERECEIVED" size="5">
                             </td>
     
                             <%-- Button --%>
@@ -211,10 +217,10 @@
                                 <input type="submit" value="Update">
                             </td>
                         </form>
-                        <form action="classes.jsp" method="get">
+                        <form action="class_enrollment.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getInt("section_id") %>" name="sectionid">
+                                value="<%= rs.getInt("ENTRY") %>" name="ENTRY">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
@@ -245,6 +251,10 @@
             </td>
         </tr>
     </table>
+
+
+
+
 </body>
 
 </html>
