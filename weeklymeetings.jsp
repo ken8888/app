@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCmeeting_type html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
@@ -32,8 +32,8 @@
 
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
-						"jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
-						"ken", "ken");
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
+                        "sahmed123", "sahmed123");
             %>
 
             <%-- -------- INSERT Code -------- --%>
