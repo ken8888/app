@@ -36,7 +36,7 @@
             pstmt = connection.prepareStatement(
             "SELECT DISTINCT x.id"
             + " FROM student x, studentenrollment y"
-            + " WHERE y.term = 'SP09'"
+            + " WHERE y.term = 'Winter 2016'"
             + " AND y.studentid = x.id");
         } catch (SQLException e){
             e.printStackTrace();
@@ -77,9 +77,12 @@
                                     </option>
                                     <% } %>
                                 </select></td>
-                                <td><input value="" id="ID" name="ID" size="10"></td>
+                                <td><input value="" name="ssn" size="10"></td>
+                                <td><input value=""  name="lastname" size="10"></td>
+                                <td><input value=""  name="middlename" size="10"></td>
+                                <td><input value=""  name="lastname" size="10"></td>
                                 <%--   <td><input id="ID" size="10"></td> --%>
-                                <td><input type="reset" value="Clear" name="clear">
+                                <td>
                                     <input type="submit" value="Submit" name="submit">
                                 </td>
                             </tr>

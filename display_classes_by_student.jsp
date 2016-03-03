@@ -24,7 +24,7 @@
         
         <%!
         public class Studentsclasses {
-            String URL = "jdbc:sqlserver://localhost:5432/cse132b";
+            String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
             String USERNAME = "sahmed123";
             String PASSWORD = "sahmed123";
 
@@ -37,11 +37,11 @@
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                        "SELECT a.sectionid, a.coursetitle, a.instructor, a.term, b.grade, b.units"
-                        + " FROM class a, classenrollment b"
+                        "SELECT a.section_id, a.course_title, a.instructor, a.term, a.enrolled, a.seats, a.waitlist, b.gradetype, b.units"
+                        + " FROM class a, studentenrollment b"
                         + " WHERE b.studentid = ?"
-                        + " AND b.term = 'SP09'"
-                        + " AND b.sectionid = a.sectionid");
+                        + " AND b.term = 'Winter 2016'"
+                        + " AND b.sectionid = a.section_id");
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
@@ -50,7 +50,7 @@
 
             public ResultSet getClasses(String ID){
                 try{
-                    pstmt.setString(1, ID);
+                    pstmt.setString(1, "123");
                     resultSet = pstmt.executeQuery();
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -67,7 +67,6 @@
             if(request.getParameter("ID") != null){
                 studentID = request.getParameter("ID");
             }
-
             Studentsclasses stdclasses = new Studentsclasses();
             ResultSet classes = stdclasses.getClasses(studentID);
         %>
@@ -78,18 +77,30 @@
                     <td>Course Title</td>
                     <td>Instructor</td>
                     <td>Term</td>
-                    <td>Grade</td>
+                    <td>Enrolled</td>
+                    <td>Seats</td>
+                    <td>Waitlist</td>
                     <td>Units</td>
-                </tr>
-                <% while (classes.next()){ %>
+    <td>Grade Type</td>
+
+    </tr>
+                <%
+
+
+
+                while (classes.next()){ %>
                 <tr>
-                    <td><%= classes.getString("sectionid") %></td>
-                    <td><%= classes.getString("coursetitle") %></td>
+                    <td><%= classes.getString("section_id") %></td>
+                    <td><%= classes.getString("course_title") %></td>
                     <td><%= classes.getString("instructor") %></td>
                     <td><%= classes.getString("term") %></td>
-                    <td><%= classes.getString("grade") %></td>
+                    <td><%= classes.getString("enrolled") %></td>
+                    <td><%= classes.getString("seats") %></td>
+                    <td><%= classes.getString("waitlist") %></td>
                     <td><%= classes.getString("units") %></td>
-                </tr>
+    <td><%= classes.getString("gradetype") %></td>
+
+    </tr>
                 <% } %>
             </tbody>
         </table>

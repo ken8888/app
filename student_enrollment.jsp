@@ -48,13 +48,15 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO studentEnrollment VALUES (?, ?, ?,?,?)");
+                            "INSERT INTO studentEnrollment VALUES (?, ?, ?,?,?,?)");
  
                         pstmt.setString(1, request.getParameter("STUDENTID"));
                         pstmt.setString(2, request.getParameter("COURSENUMBER"));
                         pstmt.setString(3, request.getParameter("SECTIONID"));
                         pstmt.setString(4, request.getParameter("TERM"));
                         pstmt.setString(5, request.getParameter("UNITS"));
+                        pstmt.setString(6, request.getParameter("gradetype"));
+
 
 
                         int rowCount = pstmt.executeUpdate();
@@ -76,10 +78,11 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE studentEnrollment SET TERM = ? WHERE STUDENTID = ?");
+                            "UPDATE studentEnrollment SET TERM = ?, gradetype = ? WHERE STUDENTID = ?");
 
                         pstmt.setString(1, request.getParameter("TERM"));
-                        pstmt.setString(2, request.getParameter("STUDENTID"));
+                        pstmt.setString(2, request.getParameter("gradetype"));
+                        pstmt.setString(3, request.getParameter("STUDENTID"));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -131,6 +134,7 @@
                             <th>Section ID</th>
                         <th>Term</th>
                         <th>Units</th>
+    <th>Grade Type</th>
                     </tr>
                     <tr>
                         <form action="student_enrollment.jsp" method="get">
@@ -140,6 +144,7 @@
     <th><input value="" name="SECTIONID" size="10"></th>
                             <th><input value="" name="TERM" size="5"></th>
     <th><input value="" name="UNITS" size="10"></th>
+    <th><input value="" name="gradetype" size = "10"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -180,6 +185,10 @@
     <td>
     <input value="<%= rs.getString("UNITS") %>"
     name="UNITS" size="10">
+    </td>
+    <td>
+    <input value="<%= rs.getString("gradetype") %>"
+    name="gradetype" size="10">
     </td>
 
                             <%-- Button --%>

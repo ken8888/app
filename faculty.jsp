@@ -68,7 +68,7 @@
                             "UPDATE faculty SET TITLE = ?, DEPTNAME = ? WHERE NAME = ?");
                         pstmt.setString(1, request.getParameter("TITLE"));
                         pstmt.setString(2, request.getParameter("DEPTNAME"));
-                        pstmt.setString(3, request.getParameter("LASTNAME"));
+                        pstmt.setString(3, request.getParameter("NAME"));
                         int rowCount = pstmt.executeUpdate();
                         // Commit transaction
                          conn.commit();
@@ -160,7 +160,7 @@
                         <form action="faculty.jsp" method="get">
                             <input type="hidden" value="delete" name="action">
                             <input type="hidden" 
-                                value="<%= rs.getString("NAME") %>" name="LASTNAME">
+                                value="<%= rs.getString("NAME") %>" name="NAME">
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Delete">
