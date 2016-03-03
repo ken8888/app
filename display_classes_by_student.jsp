@@ -30,6 +30,9 @@
 
             Connection connection = null;
             PreparedStatement pstmt = null;
+             PreparedStatement pstmt1 = null;
+
+
             ResultSet resultSet = null;
 
             public Studentsclasses(){
@@ -45,12 +48,12 @@
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
             }
+
 
             public ResultSet getClasses(String ID){
                 try{
-                    pstmt.setString(1, "123");
+                    pstmt.setString(1, ID);
                     resultSet = pstmt.executeQuery();
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -59,8 +62,75 @@
                 return resultSet;
 
             }
+               public void studentInfo(){
+                try{
+                    connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                    pstmt1 = connection.prepareStatement(
+                        "select * from student s where s.id =  ?");
+                   }catch(SQLException e){
+                        e.printStackTrace();
+                                        }
+               }
+                 public ResultSet getStudentInfo(String ID){
+                 try{
+                 studentInfo();
+                    pstmt1.setString(1, ID);
+                    resultSet = pstmt1.executeQuery();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                }
+
+                return resultSet;
+
+            }
+
         }
         %>
+
+        <%
+            String studentid = new String();
+
+            if(request.getParameter("ID") != null){
+                studentid = request.getParameter("ID");
+            }
+            Studentsclasses student = new Studentsclasses();
+            ResultSet studentInfo = student.getStudentInfo(studentid);
+        %>
+    <table border="1">
+    <tbody>
+    <tr>
+    <td>SSN</td>
+    <td>Student ID</td>
+    <td>First Name</td>
+    <td>Middle Name</td>
+    <td>Last Name</td>
+    <td>Residency</td>
+    <td>Enrollment</td>
+
+    </tr>
+        <%
+
+
+
+                while (studentInfo.next()){ %>
+    <tr>
+    <td><%= studentInfo.getInt("ssn") %></td>
+    <td><%= studentInfo.getString("id") %></td>
+    <td><%= studentInfo.getString("firstname") %></td>
+    <td><%= studentInfo.getString("middlename") %></td>
+    <td><%= studentInfo.getString("lastname") %></td>
+    <td><%= studentInfo.getString("residency") %></td>
+    <td><%= studentInfo.getString("enrollment") %></td>
+
+
+    </tr>
+        <% } %>
+    </tbody>
+
+
+    </table>
+
+    </br>
         <%
             String studentID = new String();
 
@@ -104,7 +174,8 @@
                 <% } %>
             </tbody>
         </table>
-        
+
+
         </div>
         </div>
     </body>

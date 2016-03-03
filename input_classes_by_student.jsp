@@ -70,19 +70,16 @@
                             --%>  
                             <tr>   
                                 <td>Students enrolled</td>
-                                <td><select name="selected" onchange="handleSelect(this.form)"> 
+                                <td><select name="ID" onchange="handleSelect(this.form)">
                                     <% while (resultset.next()){ %>
                                     <option>
                                         <%= resultset.getString("id") %>
                                     </option>
                                     <% } %>
                                 </select></td>
-                                <td><input value="" name="ssn" size="10"></td>
-                                <td><input value=""  name="lastname" size="10"></td>
-                                <td><input value=""  name="middlename" size="10"></td>
-                                <td><input value=""  name="lastname" size="10"></td>
-                                <%--   <td><input id="ID" size="10"></td> --%>
+
                                 <td>
+
                                     <input type="submit" value="Submit" name="submit">
                                 </td>
                             </tr>
