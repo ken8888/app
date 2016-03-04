@@ -85,7 +85,7 @@
                         + " FROM course a, class b, pastclass c, gradeconversion t"
                         + " WHERE a.coursenumber = ? AND b.instructor = ?"
                         + " AND a.coursenumber = b.course_title"
-                   
+
                         + " AND c.grade_received = t.lettergrade");
                     
                 } catch (SQLException e){

@@ -47,8 +47,8 @@
                         + " AND w.day = a.day"
                         + " AND ((a.start_time <= w.start_time"
                         + " AND w.start_time < a.end_time)"
-                        + " OR (a.start_time <= w.end_time"
-                        + " AND w.end_time < a.end_time)))"
+                        + " OR (a.start_time <= w.start_time"
+                        + " AND w.end_time <= a.end_time)))"
                     );
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -79,18 +79,29 @@
             Studentsclasses stdclasses = new Studentsclasses();
             ResultSet classes = stdclasses.getClasses(studentID);
         %>
+
+
         <table border="1">
         <tbody>
-        Available times slots for Spring
-            <% while (classes.next()){ %>
-        <tr>
-        <td><%= classes.getString(1) %></td>
-        <td><%= classes.getString(2) %></td>
-        <td><%= classes.getString(3) %></td>
-        <td><%= classes.getString(4) %></td>
-        </tr>
-            <% } %>
-        </tbody>
+
+
+                <tr>
+                <td>Date</td>
+                <td>Days</td>
+                <td>Beginning Time</td>
+                <td>Ending Time</td>
+                </tr>
+
+                Available times slots for Review
+                <% while (classes.next()){ %>
+                <tr>
+                    <td><%= classes.getString(1) %></td>
+                    <td><%= classes.getString(2) %></td>
+                    <td><%= classes.getString(3) %></td>
+                    <td><%= classes.getString(4) %></td>
+                </tr>
+                <% } %>
+            </tbody>
         </table>
 
         </div>
