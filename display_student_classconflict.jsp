@@ -37,7 +37,7 @@
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                    	"SELECT DISTINCT b.course_title, b2.course_title"
+                    	"SELECT DISTINCT b.course_title, b2.course_title, b.section_id, b2.section_id"
 
                         + " FROM studentEnrollment a, class b, classMeeting c, weeklymeeting w, class b2, classMeeting c2, weeklymeeting w2"
 
@@ -45,6 +45,7 @@
                         + " AND a.SECTIONID = b.section_id"
 
                         + " AND b.term = 'WI2016'"
+                        + " AND b.course_title != b2.course_title"
                         + " AND b.section_id = c.sectionid"
                         + " AND c.meetingid = w.meetingid"
 
@@ -53,7 +54,7 @@
                         + " AND c2.meetingid = w2.meetingid"
                         
                         + " AND w.day = w2.day"
-                        + " AND ((w.start_time > w2.start_time AND w.start_time < w2.end_time) OR (w.end_time > w2.start_time AND w.end_time < w2.end_time))"
+                        + " AND ((w.start_time > w2.start_time AND w.start_time < w2.end_time) OR (w.end_time > w2.start_time AND w.end_time < w2.end_time) OR (w.start_time >= w2.start_time AND w.end_time <= w2.end_time))"
                         );
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -87,13 +88,17 @@
             <tbody>
                 <tr>
                     <td>Class Enrolled</td>
+                    <td>Section ID</td>
                     <td>Conflicts With</td>
+                    <td>Section ID</td>
                 </tr>
 
                 <% while (students.next()){ %>
                 <tr>
                     <td><%= students.getString(1) %></td>
+                    <td><%= students.getString(3) %></td>
                     <td><%= students.getString(2) %></td>
+                    <td><%= students.getString(4) %></td>
                 </tr>
                 <% } %>
             </tbody>
