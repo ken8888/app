@@ -36,7 +36,7 @@
             pstmt = connection.prepareStatement(
             "SELECT DISTINCT x.id"
             + " FROM student x, studentenrollment y"
-            + " WHERE y.term = 'Winter 2016'"
+            + " WHERE y.term = 'WI2016'"
             + " AND y.studentid = x.id");
         } catch (SQLException e){
             e.printStackTrace();

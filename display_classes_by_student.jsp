@@ -42,7 +42,7 @@
                         "SELECT a.section_id, a.course_title, a.instructor, a.term, a.enrolled, a.seats, a.waitlist, b.gradetype, b.units"
                         + " FROM class a, studentenrollment b"
                         + " WHERE b.studentid = ?"
-                        + " AND b.term = 'Winter 2016'"
+                        + " AND b.term = 'WI2016'"
                         + " AND b.sectionid = a.section_id");
                 } catch (SQLException e){
                     e.printStackTrace();
