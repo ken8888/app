@@ -78,11 +78,12 @@
                         // Create the prepared statement and use it to
                         // UPDATE the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPDATE studentEnrollment SET TERM = ?, gradetype = ? WHERE STUDENTID = ?");
+                            "UPDATE studentEnrollment SET TERM = ?, gradetype = ?, units = ? WHERE STUDENTID = ?");
 
                         pstmt.setString(1, request.getParameter("TERM"));
                         pstmt.setString(2, request.getParameter("gradetype"));
-                        pstmt.setString(3, request.getParameter("STUDENTID"));
+                                                pstmt.setString(3, request.getParameter("units"));
+                        pstmt.setString(4, request.getParameter("STUDENTID"));
 
                         int rowCount = pstmt.executeUpdate();
 

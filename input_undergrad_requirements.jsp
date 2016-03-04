@@ -1,12 +1,15 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+        <% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
+
 <%
-   String URL = "jdbc:postgresql://localhost:5432/cse132b";
-   String USERNAME = "postgres";
-   String PASSWORD = "hardylou";
+ String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
+            String USERNAME = "sahmed123";
+            String PASSWORD = "sahmed123";
    Connection connection = null;
    PreparedStatement pstmt = null;
    ResultSet resultset = null;
+      PreparedStatement pstmt1 = null;
+   ResultSet resultset1 = null;
 %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,6 +25,10 @@
                 var selIndex = form_classes_by_student.selected.selectedIndex;
                 var selName = form_classes_by_student.selected.options[selIndex].text;
                 document.getElementById("ID").value = selName;
+
+    var selIndex1 = form_classes_by_student.selected.selectedIndex;
+    var selName1 = form_classes_by_student.selected.options[selIndex1].text;
+    document.getElementById("title").value = selName1;
             }
         </script> 
     </head>
@@ -33,14 +40,19 @@
             pstmt = connection.prepareStatement(
             "SELECT DISTINCT x.studentid"
             + " FROM undergraduate x, studentenrollment y"
-            + " WHERE y.term = 'SP09'"
+            + " WHERE y.term = 'WI2016'"
             + " AND y.studentid = x.studentid");
+
+            pstmt1 = connection.prepareStatement(
+            "select title from degree"
+            );
         } catch (SQLException e){
             e.printStackTrace();
         }
 
         try{
             resultset = pstmt.executeQuery();
+            resultset1 = pstmt1.executeQuery();
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -75,7 +87,14 @@
                                     <% } %>
                                 </select></td>
                                 <td><input value="" id="ID" name="ID" size="10"></td>
-                                <%--   <td><input id="ID" size="10"></td> --%>
+    <td><select value="" name="title" >
+        <% while (resultset1.next()){ %>
+    <option>
+        <%= resultset1.getString("title") %>
+    </option>
+        <% } %>
+    </select></td>
+                                   <%--<td><input value="" id="title" name="title" size="10"></td>--%>
                                 <td><input type="reset" value="Clear" name="clear">
                                     <input type="submit" value="Submit" name="submit">
                                 </td>
