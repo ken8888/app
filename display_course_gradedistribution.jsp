@@ -1,5 +1,5 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+<% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,15 +23,17 @@
         <div style = "float:left; width: 80%;">
         <%!
         public class GradeReport {
-            String URL = "jdbc:postgresql://localhost:5432/cse132b";
-            String USERNAME = "postgres";
-            String PASSWORD = "hardylou";
+            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String USERNAME = "sahmed123";
+            String PASSWORD = "sahmed123";
 
             Connection connection = null;
+
             PreparedStatement pstmt_ii = null;
             PreparedStatement pstmt_iii = null;
             PreparedStatement pstmt_iv = null;
             PreparedStatement pstmt_v = null;
+
             ResultSet rs_ii = null;
             ResultSet rs_iii = null;
             ResultSet rs_iv = null;
@@ -43,33 +45,48 @@
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     
                     pstmt_ii = connection.prepareStatement(
-                        "SELECT countA, countB, countC, countD, countOther"
-                        + " FROM CPQG"
-                        + " WHERE title = ? AND instructor = ? AND term = ?");
+                        "SELECT COUNT(CASE WHEN c.grade_received IN ('A+','A','A-') THEN 1 END) AS numA,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('C+','C','C-') THEN 1 END) AS numC,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('D+','D','D-') THEN 1 END) AS numD,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
+
+                        + " FROM course a, class b, pastclass c"
+                        + " WHERE a.title = ? AND b.instructor = ? AND b.term = ?"
+                        + " AND a.title = b.course_title"
+                        + " AND b.section_id = c.section_id");
                     
                     pstmt_iii = connection.prepareStatement(
-                       "SELECT countA, countB, countC, countD, countOther"
-                        + " FROM CPG"
-                        + " WHERE title = ? AND instructor = ?");
-                    		
+                       "SELECT COUNT(CASE WHEN c.grade_received IN ('A+','A','A-') THEN 1 END) AS numA,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('C+','C','C-') THEN 1 END) AS numC,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('D+','D','D-') THEN 1 END) AS numD,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
+
+                        + " FROM course a, class b, pastclass c"
+                        + " WHERE a.title = ? AND b.instructor = ?"
+                        + " AND a.title = b.course_title"
+                        + " AND b.section_id = c.section_id");
+                            
                     pstmt_iv = connection.prepareStatement(
-                        "SELECT COUNT(CASE WHEN c.gradereceived IN ('A+','A','A-') THEN 1 END) AS numA,"
-                              + "COUNT(CASE WHEN c.gradereceived IN ('B+','B','B-') THEN 1 END) AS numB,"
-                              + "COUNT(CASE WHEN c.gradereceived IN ('C+','C','C-') THEN 1 END) AS numC,"
-                              + "COUNT(CASE WHEN c.gradereceived IN ('D+','D','D-') THEN 1 END) AS numD,"
-                              + "COUNT(CASE WHEN c.gradereceived IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
-                        + " FROM course a, class b, classenrollment c"
+                        "SELECT COUNT(CASE WHEN c.grade_received IN ('A+','A','A-') THEN 1 END) AS numA,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('C+','C','C-') THEN 1 END) AS numC,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('D+','D','D-') THEN 1 END) AS numD,"
+                              + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
+
+                        + " FROM course a, class b, pastclass c"
                         + " WHERE a.title = ?"
-                        + " AND a.title = b.coursetitle"
-                        + " AND b.sectionid = c.sectionid");
+                        + " AND a.title = b.course_title"
+                        + " AND b.section_id = c.section_id");
                     
                     pstmt_v = connection.prepareStatement(
-                    	"SELECT AVG(t.value)"
-                    	+ " FROM course a, class b, classenrollment c, gradeconversion t"
+                        "SELECT AVG(t.number_grade)"
+                        + " FROM course a, class b, pastclass c, gradeconversion t"
                         + " WHERE a.title = ? AND b.instructor = ?"
-                        + " AND a.title = b.coursetitle"
-                        + " AND b.sectionid = c.sectionid"
-                        + " AND c.gradereceived = t.lettergrade");
+                        + " AND a.title = b.course_title"
+                        + " AND b.section_id = c.section_id"
+                        + " AND c.grade_received = t.letter_grade");
                     
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -84,10 +101,10 @@
                     pstmt_ii.setString(3, TERM);
 
                     rs_ii = pstmt_ii.executeQuery();
+
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
                 return rs_ii;
             }
             
@@ -97,10 +114,10 @@
                     pstmt_iii.setString(2, INSTRUCTOR);
 
                     rs_iii = pstmt_iii.executeQuery();
+
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
                 return rs_iii;
             }
 
@@ -109,10 +126,10 @@
                     pstmt_iv.setString(1, TITLE);
 
                     rs_iv = pstmt_iv.executeQuery();
+
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
                 return rs_iv;
             }
             
@@ -122,10 +139,10 @@
                     pstmt_v.setString(2, INSTRUCTOR);
 
                     rs_v = pstmt_v.executeQuery();
+
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
                 return rs_v;
             }
         }
@@ -136,17 +153,9 @@
             String classInstructor = new String();
             String classTerm = new String();
 
-            //if (request.getParameter("TITLE") != null) {
-                courseTitle = request.getParameter("TITLE");
-            //}
-            
-            //if (request.getParameter("INSTRUCTOR") != null) {
-                classInstructor = request.getParameter("INSTRUCTOR");
-            //}
-            
-            //if (request.getParameter("TERM") != null) {
-                classTerm = request.getParameter("TERM");
-            //}
+            courseTitle = request.getParameter("TITLE");
+            classInstructor = request.getParameter("INSTRUCTOR");
+            classTerm = request.getParameter("TERM");
 
             GradeReport stdreport = new GradeReport();
             ResultSet part_ii = stdreport.getDistribution(courseTitle, classInstructor, classTerm);
@@ -156,7 +165,6 @@
         %>
         <table border="1">
             <tbody>
-                Count of grades given by Professor Y at Quarter Z to the students taking Course X
                 <tr>
                     <td>A</td>
                     <td>B</td>
@@ -166,11 +174,11 @@
                 </tr>
                 <% while (part_ii.next()){ %>
                 <tr>
-                    <td><%= part_ii.getDouble("countA") %></td>
-                    <td><%= part_ii.getDouble("countB") %></td>
-                    <td><%= part_ii.getDouble("countC") %></td>
-                    <td><%= part_ii.getDouble("countD") %></td>
-                    <td><%= part_ii.getDouble("countOther") %></td>
+                    <td><%= part_ii.getInt("numA") %></td>
+                    <td><%= part_ii.getInt("numB") %></td>
+                    <td><%= part_ii.getInt("numC") %></td>
+                    <td><%= part_ii.getInt("numD") %></td>
+                    <td><%= part_ii.getInt("numOther") %></td>
                 </tr>
                 <% } %>
             </tbody>
@@ -178,7 +186,6 @@
         
         <table border="1">
             <tbody>
-                Count of grades given by Professor Y to students in Course X over the years
                 <tr>
                     <td>A</td>
                     <td>B</td>
@@ -188,11 +195,11 @@
                 </tr>
                 <% while (part_iii.next()){ %>
                 <tr>
-                    <td><%= part_iii.getDouble("countA") %></td>
-                    <td><%= part_iii.getDouble("countB") %></td>
-                    <td><%= part_iii.getDouble("countC") %></td>
-                    <td><%= part_iii.getDouble("countD") %></td>
-                    <td><%= part_iii.getDouble("countOther") %></td>
+                    <td><%= part_iii.getInt("numA") %></td>
+                    <td><%= part_iii.getInt("numB") %></td>
+                    <td><%= part_iii.getInt("numC") %></td>
+                    <td><%= part_iii.getInt("numD") %></td>
+                    <td><%= part_iii.getInt("numOther") %></td>
                 </tr>
                 <% } %>
             </tbody>
@@ -200,7 +207,6 @@
         
         <table border="1">
             <tbody>
-                Count of grades given to students in Course X over the years
                 <tr>
                     <td>A</td>
                     <td>B</td>
@@ -222,7 +228,6 @@
         
         <table border="1">
             <tbody>
-                GPA of grades that Professor Y has give in Course X over the years
                 <tr>
                     <td>GPA</td>
                 </tr>

@@ -13,7 +13,7 @@
         
             <div style = "float:left; width:20%;">
                 <%-- -------- Include menu HTML code -------- --%>
-                <jsp:include page="menu.html" />
+                <jsp:include page="menu.html" />                
             </div>
         
             <div style = "float:left; width:80%;">
