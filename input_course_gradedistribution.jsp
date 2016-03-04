@@ -22,16 +22,20 @@
                         <tbody>
                             <tr>   
                                 <td>Course Title :</td>
-                                <td><input value=" " name="TITLE" size="20"></td>
+                                <td><input value="" name="title" size="20"></td>
                                 <td>Professor :</td>
-                                <td><input value=" " name="INSTRUCTOR" size="20"></td>
+                                <td><input value="" name="instructor" size="20"></td>
                                 <td>Term :</td>
-                                <td><input value=" " name="TERM" size="5"></td>
-                            </tr>
-                        </tbody>
+                                <td><input value="" name="term" size="5"></td>
+
+    <td>
+
+    <input type="submit" value="Submit" name="submit">
+    </td>
+    </tr>
+    </tbody>
                     </table>
-                    <input type="reset" value="Clear" name="clear" />
-                    <input type="submit" value="Submit" name="submit" />
+
                 </form>
             </div>
         

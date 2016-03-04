@@ -12,7 +12,7 @@
     </head>
     <body>
         <h1>Display information on the distribution of grades in particular courses and by particular professors</h1>
-        
+
         <div style = "width:100%">
         
         <div style = "float:left; width:20%;">
@@ -43,7 +43,7 @@
                 
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
-                    
+
                     pstmt_ii = connection.prepareStatement(
                         "SELECT COUNT(CASE WHEN c.grade_received IN ('A+','A','A-') THEN 1 END) AS numA,"
                               + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
@@ -52,10 +52,10 @@
                               + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
 
                         + " FROM course a, class b, pastclass c"
-                        + " WHERE a.title = ? AND b.instructor = ? AND b.term = ?"
-                        + " AND a.title = b.course_title"
-                        + " AND b.section_id = c.section_id");
-                    
+                        + " WHERE a.coursenumber = ? AND b.instructor = ? AND b.term = ?"
+                        + " AND a.coursenumber = b.course_title"
+                       );
+
                     pstmt_iii = connection.prepareStatement(
                        "SELECT COUNT(CASE WHEN c.grade_received IN ('A+','A','A-') THEN 1 END) AS numA,"
                               + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
@@ -64,10 +64,10 @@
                               + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
 
                         + " FROM course a, class b, pastclass c"
-                        + " WHERE a.title = ? AND b.instructor = ?"
-                        + " AND a.title = b.course_title"
-                        + " AND b.section_id = c.section_id");
-                            
+                        + " WHERE a.coursenumber = ? AND b.instructor = ?"
+                        + " AND a.coursenumber = b.course_title"
+                       );
+
                     pstmt_iv = connection.prepareStatement(
                         "SELECT COUNT(CASE WHEN c.grade_received IN ('A+','A','A-') THEN 1 END) AS numA,"
                               + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
@@ -76,16 +76,16 @@
                               + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
 
                         + " FROM course a, class b, pastclass c"
-                        + " WHERE a.title = ?"
-                        + " AND a.title = b.course_title"
-                        + " AND b.section_id = c.section_id");
-                    
+                        + " WHERE a.coursenumber = ?"
+                        + " AND a.coursenumber = b.course_title"
+                        );
+
                     pstmt_v = connection.prepareStatement(
                         "SELECT AVG(t.VALUE)"
                         + " FROM course a, class b, pastclass c, gradeconversion t"
-                        + " WHERE a.title = ? AND b.instructor = ?"
-                        + " AND a.title = b.course_title"
-                        + " AND b.section_id = c.section_id"
+                        + " WHERE a.coursenumber = ? AND b.instructor = ?"
+                        + " AND a.coursenumber = b.course_title"
+                   
                         + " AND c.grade_received = t.lettergrade");
                     
                 } catch (SQLException e){
@@ -94,11 +94,13 @@
 
             }
 
-            public ResultSet getDistribution(String TITLE, String INSTRUCTOR, String TERM){
+            public ResultSet getDistribution(String title, String instructor, String term){
                 try{
-                    pstmt_ii.setString(1, TITLE);
-                    pstmt_ii.setString(2, INSTRUCTOR);
-                    pstmt_ii.setString(3, TERM);
+
+
+    pstmt_ii.setString(1, title);
+                    pstmt_ii.setString(2, instructor);
+                    pstmt_ii.setString(3, term);
 
                     rs_ii = pstmt_ii.executeQuery();
 
@@ -108,10 +110,10 @@
                 return rs_ii;
             }
             
-            public ResultSet getDistribution(String TITLE, String INSTRUCTOR){
+            public ResultSet getDistribution(String title, String instructor){
                 try{
-                    pstmt_iii.setString(1, TITLE);
-                    pstmt_iii.setString(2, INSTRUCTOR);
+                    pstmt_iii.setString(1, title);
+                    pstmt_iii.setString(2, instructor);
 
                     rs_iii = pstmt_iii.executeQuery();
 
@@ -121,9 +123,9 @@
                 return rs_iii;
             }
 
-            public ResultSet getDistribution(String TITLE){
+            public ResultSet getDistribution(String title){
                 try{
-                    pstmt_iv.setString(1, TITLE);
+                    pstmt_iv.setString(1, title);
 
                     rs_iv = pstmt_iv.executeQuery();
 
@@ -133,10 +135,10 @@
                 return rs_iv;
             }
             
-            public ResultSet getGPA(String TITLE, String INSTRUCTOR){
+            public ResultSet getGPA(String title, String instructor){
                 try{
-                    pstmt_v.setString(1, TITLE);
-                    pstmt_v.setString(2, INSTRUCTOR);
+                    pstmt_v.setString(1, title);
+                    pstmt_v.setString(2, instructor);
 
                     rs_v = pstmt_v.executeQuery();
 
@@ -153,10 +155,9 @@
             String classInstructor = new String();
             String classTerm = new String();
 
-            courseTitle = request.getParameter("TITLE");
-            classInstructor = request.getParameter("INSTRUCTOR");
-            classTerm = request.getParameter("TERM");
-
+            courseTitle = request.getParameter("title");
+            classInstructor = request.getParameter("instructor");
+            classTerm = request.getParameter("term");
             GradeReport stdreport = new GradeReport();
             ResultSet part_ii = stdreport.getDistribution(courseTitle, classInstructor, classTerm);
             ResultSet part_iii = stdreport.getDistribution(courseTitle, classInstructor);
