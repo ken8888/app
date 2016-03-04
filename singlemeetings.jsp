@@ -50,7 +50,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO SingleMeeting VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO SingleMeeting VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
  
                         pstmt.setInt(
                                 1, Integer.parseInt(request.getParameter("meetingid")));
@@ -61,6 +61,7 @@
                         pstmt.setString(6, request.getParameter("end_time"));
                         pstmt.setString(7, request.getParameter("attendance"));
                         pstmt.setString(8, request.getParameter("_date"));
+                        pstmt.setString(9, request.getParameter("day"));
 
 
                         int rowCount = pstmt.executeUpdate();
@@ -83,7 +84,7 @@
                         // UPdate the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
                             "UPdate WeeklyMeeting SET meeting_type = ?, building_name = ?, room_number = ?, " + 
-                            "start_time = ?, end_time = ?, attendance = ?, _date = ? " +
+                            "start_time = ?, end_time = ?, attendance = ?, _date = ?, day = ? " +
                             " WHERE meetingid = ?");
 
                         pstmt.setString(1, request.getParameter("meeting_type"));
@@ -93,9 +94,9 @@
                         pstmt.setString(5, request.getParameter("end_time"));
                         pstmt.setString(6, request.getParameter("attendance"));
                         pstmt.setString(7, request.getParameter("_date"));
-
+                        pstmt.setString(8, request.getParameter("day"));
                         pstmt.setInt(
-                                8, Integer.parseInt(request.getParameter("meetingid")));
+                                9, Integer.parseInt(request.getParameter("meetingid")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -149,6 +150,7 @@
                         <th>End Time</th>
                         <th>Attendance</th>
                         <th>Date</th>
+                        <th>Day</th>
                     </tr>
                     <tr>
                         <form action="singlemeetings.jsp" method="get">
@@ -161,8 +163,8 @@
                             <th><input value="" name="end_time" size="10"></th>
                             <th><input value="" name="attendance" size="10"></th>
                             <th><input value="" name="_date" size="10"></th>
-
-
+                            <th><input value="" name="day" size="10"></th>
+                            
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -225,6 +227,10 @@
                             <td>
                                 <input value="<%= rs.getString("_date") %>"
                                     name="_date" size="10">
+                            </td>
+                            <td>
+                                <input value="<%= rs.getString("day") %>"
+                                    name="day" size="10">
                             </td>
 
                             <%-- Button --%>
