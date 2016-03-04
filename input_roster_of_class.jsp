@@ -21,7 +21,7 @@
                         <table border="1">
                         <tbody>
                             <tr>   
-                                <td>Class Title :</td>
+                                <td>Course Abbrev:</td>
                                 <td><input value="" name="TITLE" size="20"></td>
                             </tr>
                         </tbody>
