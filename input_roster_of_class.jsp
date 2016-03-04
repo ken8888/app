@@ -1,12 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <%@page language="java" import="java.sql.*" %>
+
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        <% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
+
+    <%
+
+   String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
+
+   String USERNAME = "sahmed123";
+   String PASSWORD = "sahmed123";
+   Connection connection = null;
+   PreparedStatement pstmt = null;
+   ResultSet resultset = null;
+%>
 <html>
     <head>
         <title>Roster of Class</title>
+    <script type="text/JavaScript">
+    function handleSelect(form_student_gradereport){
+    var selIndex = form_student_gradereport.selected.selectedIndex;
+    var selName = form_student_gradereport.selected.options[selIndex].text;
+    document.getElementById("ID").value = selName;
+    }
+    </script>
     </head>
     <body>
+        <%
+        try{
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            pstmt = connection.prepareStatement(
+            "select coursenumber from course"
+            );
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
 
+        try{
+            resultset = pstmt.executeQuery();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        %>
         <h1>Display the roster of a class</h1>
         
         <div style = "width:100%">
@@ -20,14 +57,21 @@
                 <form name="form_roster_of_class" action="display_roster_of_class.jsp" method="POST">
                         <table border="1">
                         <tbody>
-                            <tr>   
+                            <td>
                                 <td>Course Abbrev:</td>
-                                <td><input value="" name="TITLE" size="20"></td>
+    <td><select  name="title" >
+        <% while (resultset.next()){ %>
+    <option>
+        <%= resultset.getString("coursenumber") %>
+    </option>
+        <% } %>
+    </select></td>
+    <td><input type="submit" value="Submit" name="submit" /></td>
                             </tr>
                         </tbody>
                     </table>
-                    <input type="reset" value="Clear" name="clear" />
-                    <input type="submit" value="Submit" name="submit" />
+
+
                 </form>
             </div>
         

@@ -24,7 +24,7 @@
         
         <%!
         public class ClassRoster {
-            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
             String USERNAME = "sahmed123";
             String PASSWORD = "sahmed123";
 
