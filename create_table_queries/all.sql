@@ -87,7 +87,8 @@ primary key(meetingid)
 create table concentration(
 name varchar(50),
 reqcourse varchar(50),
-foreign key(reqcourse) references course(coursenumber)
+mingpa varchar(50),
+minunits int,
 );
 
 create table degree(
@@ -105,6 +106,8 @@ category varchar(50),
 lowerdivunits int,
 upperdivunits int,
 gpareq varchar(50),
+techunits int,
+graduateunits int,
 foreign key(degreeid) references degree(id)
 );
 
@@ -152,6 +155,7 @@ is_precandidate varchar(50),
 is_candidate varchar(50),
 candidate_advisor varchar(50),
 committeeid varchar(50),
+degree varchar(50),
 primary key(studentid),
 foreign key (studentid) references student(id),
 foreign key(deptname) references department(name),

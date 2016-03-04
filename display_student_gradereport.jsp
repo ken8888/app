@@ -1,5 +1,5 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+        <% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,9 +23,9 @@
         <div style = "float:left; width: 80%;">
         <%!
         public class GradeReport {
-            String URL = "jdbc:postgresql://localhost:5432/cse132b";
-            String USERNAME = "postgres";
-            String PASSWORD = "hardylou";
+            String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
+            String USERNAME = "sahmed123";
+            String PASSWORD = "sahmed123";
 
             Connection connection = null;
             PreparedStatement pstmt_classes = null;
@@ -41,24 +41,24 @@
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     
                     pstmt_classes = connection.prepareStatement(
-                        "SELECT a.sectionid, a.coursetitle, a.instructor, a.term, b.grade, b.units, b.gradereceived"
-                        + " FROM class a, classenrollment b"
-                        + " WHERE b.studentid = ?"
-                        + " AND b.sectionid = a.sectionid"
+                        "SELECT a.section_id, a.course_title, a.instructor, b.term, b.grade_type, b.units, b.grade_received"
+                        + " FROM class a, pastclass b"
+                        + " WHERE b.student_id = ?"
+                        + " AND b.section_id = a.section_id"
                         + " ORDER BY b.term");
                     
                     pstmt_gpa = connection.prepareStatement(
                             "SELECT b.term, AVG(t.value)"
-                            + " FROM classenrollment b, gradeconversion t"
-                            + " WHERE b.studentid = ?"
-                            + " AND b.gradereceived = t.lettergrade"
+                            + " FROM pastclass b, gradeconversion t"
+                            + " WHERE b.student_id = ?"
+                            + " AND b.grade_received = t.lettergrade"
                             + " GROUP BY b.term");
                         
                     pstmt_cgpa = connection.prepareStatement(
                             "SELECT AVG(t.value)" +
-                            "FROM classenrollment b, gradeconversion t" +
-                            " WHERE b.studentid = ?" +
-                            " AND b.gradereceived = t.lettergrade");
+                            "FROM pastclass b, gradeconversion t" +
+                            " WHERE b.student_id = ?" +
+                            " AND b.grade_received = t.lettergrade");
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
@@ -125,13 +125,13 @@
                 </tr>
                 <% while (classes.next()){ %>
                 <tr>
-                    <td><%= classes.getString("sectionid") %></td>
-                    <td><%= classes.getString("coursetitle") %></td>
+                    <td><%= classes.getString("section_id") %></td>
+                    <td><%= classes.getString("course_title") %></td>
                     <td><%= classes.getString("instructor") %></td>
                     <td><%= classes.getString("term") %></td>
-                    <td><%= classes.getString("grade") %></td>
+                    <td><%= classes.getString("grade_type") %></td>
                     <td><%= classes.getString("units") %></td>
-                    <td><%= classes.getString("gradereceived") %></td>
+                    <td><%= classes.getString("grade_received") %></td>
                 </tr>
                 <% } %>
             </tbody>

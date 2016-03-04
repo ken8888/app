@@ -45,7 +45,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO graduate VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO graduate VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
                         pstmt.setString(1, request.getParameter("STUDENTID"));
                         pstmt.setString(2, request.getParameter("DEPTNAME"));
@@ -53,7 +53,9 @@
                         pstmt.setString(4, request.getParameter("IS_PRECANDIDATE"));
                         pstmt.setString(5, request.getParameter("IS_CANDIDATE")); 
                         pstmt.setString(6, request.getParameter("CANDIDATE_ADVISOR")); 
-                        pstmt.setString(7, request.getParameter("COMMITTEEID")); 
+                        pstmt.setString(7, request.getParameter("COMMITTEEID"));
+                        pstmt.setString(8, request.getParameter("degree"));
+
                         
                         int rowCount = pstmt.executeUpdate();
                         
@@ -84,7 +86,8 @@
                         pstmt.setString(4, request.getParameter("IS_CANDIDATE"));
                         pstmt.setString(5, request.getParameter("CANDIDATE_ADVISOR"));
                         pstmt.setString(6, request.getParameter("COMMITTEEID")); 
-                        pstmt.setString(7, request.getParameter("STUDENTID")); 
+                        pstmt.setString(7, request.getParameter("STUDENTID"));
+                                                pstmt.setString(8, request.getParameter("degree"));
 
                         int rowCount = pstmt.executeUpdate();
                         
@@ -138,6 +141,7 @@
                         <th>Is Candidate</th>
                         <th>Candidate Advisor</th>
                         <th>Committee ID</th>
+    <th>Degree</th>
                     </tr>
                     <tr>
                         <form action="graduates.jsp" method="get">
@@ -149,7 +153,9 @@
                             <th><input value="" name="IS_CANDIDATE" size="15"></th>
                             <th><input value="" name="CANDIDATE_ADVISOR" size="15"></th>
                             <th><input value="" name="COMMITTEEID" size="10"></th>
-                            <th><input type="submit" value="Insert"></th>
+    <th><input value="" name="degree" size="10"></th>
+
+    <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
 
@@ -206,6 +212,10 @@
                                 <input value="<%= rs.getString("COMMITTEEID") %>" 
                                     name="COMMITTEEID" size="15">
                             </td>
+    <td>
+    <input value="<%= rs.getString("degree") %>"
+    name="degree" size="15">
+    </td>
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">

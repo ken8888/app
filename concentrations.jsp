@@ -49,10 +49,12 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO concentration VALUES (?, ?)");
+                            "INSERT INTO concentration VALUES (?, ?, ?, ?)");
  
                         pstmt.setString(1, request.getParameter("NAME"));
                         pstmt.setString(2, request.getParameter("REQCOURSE"));
+                        pstmt.setString(3, request.getParameter("mingpa"));
+                        pstmt.setString(4, request.getParameter("minunits"));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -77,6 +79,8 @@
 
                         pstmt.setString(1, request.getParameter("REQCOURSE"));
                         pstmt.setString(2, request.getParameter("NAME"));
+                                                pstmt.setString(3, request.getParameter("mingpa"));
+                        pstmt.setString(4, request.getParameter("minunits"));
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -125,12 +129,17 @@
                     <tr>
                         <th>Concentration</th>
                         <th>Required Course</th>
+
+    <th>Minimum GPA</th>
+    <th>Minimum Units</th>
                     </tr>
                     <tr>
                         <form action="concentrations.jsp" method="get">
                             <input type="hidden" value="insert" name="action">
                             <th><input value="" name="NAME" size="20"></th>
                             <th><input value="" name="REQCOURSE" size="20"></th>
+    <th><input value="" name="mingpa" size="20"></th>
+    <th><input value="" name="minunits" size="20"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -158,6 +167,14 @@
                                 <input value="<%= rs.getString("REQCOURSE") %>" 
                                     name="REQCOURSE" size="20">
                             </td>
+    <td>
+    <input value="<%= rs.getString("mingpa") %>"
+    name="mingpa" size="20">
+    </td>
+    <td>
+    <input value="<%= rs.getInt("minunits") %>"
+    name="minunits" size="20">
+    </td>
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">

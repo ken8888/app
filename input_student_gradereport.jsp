@@ -1,9 +1,11 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
-<%
-   String URL = "jdbc:postgresql://localhost:5432/cse132b";
-   String USERNAME = "postgres";
-   String PASSWORD = "hardylou";
+        <% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
+
+    <%
+   String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
+
+   String USERNAME = "sahmed123";
+   String PASSWORD = "sahmed123";
    Connection connection = null;
    PreparedStatement pstmt = null;
    ResultSet resultset = null;
@@ -32,8 +34,8 @@
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             pstmt = connection.prepareStatement(
             "SELECT DISTINCT x.id"
-            + " FROM Student x, ClassEnrollment y"
-            + " WHERE y.studentid = x.id");
+            + " FROM Student x, pastclass y"
+            + " WHERE y.student_id = x.id");
         } catch (SQLException e){
             e.printStackTrace();
         }

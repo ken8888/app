@@ -49,7 +49,7 @@
                         // Create the prepared statement and use it to
                         // INSERT the student attributes INTO the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "INSERT INTO degreeCategory VALUES (?, ?, ?, ?, ?)");
+                            "INSERT INTO degreeCategory VALUES (?, ?, ?, ?, ?, ?, ?)");
  
                         pstmt.setString(1, request.getParameter("DEGREEID"));
                         pstmt.setString(2, request.getParameter("CATEGORY"));
@@ -58,6 +58,10 @@
                         pstmt.setInt(
                                 4, Integer.parseInt(request.getParameter("UPPERDIVUNITS")));
                         pstmt.setString(5, request.getParameter("GPAREQ"));
+                                                pstmt.setString(6, request.getParameter("techunits"));
+
+                        pstmt.setString(7, request.getParameter("graduateunits"));
+
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -88,6 +92,9 @@
                         pstmt.setString(3, request.getParameter("GPAREQ"));
                         pstmt.setString(4, request.getParameter("DEGREEID"));
                         pstmt.setString(5, request.getParameter("CATEGORY"));
+                         pstmt.setString(6, request.getParameter("techunits"));
+
+                        pstmt.setString(7, request.getParameter("graduateunits"));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -138,6 +145,8 @@
                         <th>Lower Div Units</th>
                         <th>Upper Div Units</th>
                         <th>Minimum GPA</th>
+                        <th>Tech Elective Units</th>
+    <th>Graduate Units</th>
                     </tr>
                     <tr>
                         <form action="degreecategories.jsp" method="get">
@@ -147,6 +156,8 @@
                             <th><input value="" name="LOWERDIVUNITS" size="5"></th>
                             <th><input value="" name="UPPERDIVUNITS" size="5"></th>
                             <th><input value="" name="GPAREQ" size="5"></th>
+    <th><input value="" name="techunits" size="5"></th>
+    <th><input value="" name="graduateunits" size="5"></th>
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
@@ -192,7 +203,17 @@
                                 <input value="<%= rs.getString("GPAREQ") %>" 
                                     name="GPAREQ" size="5">
                             </td>
-    
+
+    <td>
+    <input value="<%= rs.getInt("techunits") %>"
+    name="techunits" size="5">
+    </td>
+
+    <%-- Get the SSN, which is a number --%>
+    <td>
+    <input value="<%= rs.getInt("graduateunits") %>"
+    name="graduateunits" size="5">
+    </td>
                             <%-- Button --%>
                             <td>
                                 <input type="submit" value="Update">

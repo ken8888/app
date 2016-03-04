@@ -22,6 +22,8 @@
             <%-- Set the scripting language to Java and --%>
             <%-- Import the java.sql package --%>
             <%@ page language="java" import="java.sql.*" %>
+    <%@ page import="java.text.DateFormat" %>
+    <%@ page import="java.text.SimpleDateFormat" %>
     
             <%-- -------- Open Connection Code -------- --%>
             <%
@@ -59,10 +61,14 @@
                         pstmt.setString(6, request.getParameter("start_date"));
                         pstmt.setString(7, request.getParameter("end_date"));
                         pstmt.setString(8, request.getParameter("day"));
-                        pstmt.setInt(
-                                9, Integer.parseInt(request.getParameter("start_time")));
-                        pstmt.setInt(
-                                10, Integer.parseInt(request.getParameter("end_time")));
+
+DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+		Time start = new java.sql.Time(formatter.parse(request.getParameter("start_time")).getTime());
+				Time end = new java.sql.Time(formatter.parse(request.getParameter("end_time")).getTime());
+                        pstmt.setTime(
+                                9,start );
+                        pstmt.setTime(
+                                10,end );
 
                         int rowCount = pstmt.executeUpdate();
 
@@ -97,9 +103,13 @@
                         pstmt.setString(6, request.getParameter("attendance"));
                         pstmt.setString(7, request.getParameter("start_date"));
                         pstmt.setString(8, request.getParameter("end_date"));
-                        pstmt.setString(9, request.getParameter("day"));
-                        pstmt.setInt(
-                                10, Integer.parseInt(request.getParameter("meetingid")));
+            DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+		Time start = new java.sql.Time(formatter.parse(request.getParameter("start_time")).getTime());
+				Time end = new java.sql.Time(formatter.parse(request.getParameter("end_time")).getTime());
+                        pstmt.setTime(
+                                9,start );
+                        pstmt.setTime(
+                                10,end );
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
@@ -236,13 +246,13 @@
                             
                             <%-- Get the start time --%>
                             <td>
-                                <input value="<%= rs.getInt("start_time") %>" 
+                                <input value="<%= rs.getTime("start_time") %>"
                                     name="start_time" size="10">
                             </td>
                             
                             <%-- Get the end time --%>
                             <td>
-                                <input value="<%= rs.getInt("end_time") %>" 
+                                <input value="<%= rs.getTime("end_time") %>"
                                     name="end_time" size="10">
                             </td>
 

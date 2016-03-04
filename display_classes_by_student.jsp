@@ -30,7 +30,6 @@
 
             Connection connection = null;
             PreparedStatement pstmt = null;
-             PreparedStatement pstmt1 = null;
 
 
             ResultSet resultSet = null;
@@ -65,7 +64,7 @@
                public void studentInfo(){
                 try{
                     connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                    pstmt1 = connection.prepareStatement(
+                    pstmt = connection.prepareStatement(
                         "select * from student s where s.id =  ?");
                    }catch(SQLException e){
                         e.printStackTrace();
@@ -74,8 +73,8 @@
                  public ResultSet getStudentInfo(String ID){
                  try{
                  studentInfo();
-                    pstmt1.setString(1, ID);
-                    resultSet = pstmt1.executeQuery();
+                    pstmt.setString(1, ID);
+                    resultSet = pstmt.executeQuery();
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
