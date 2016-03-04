@@ -68,7 +68,7 @@
                             --%>  
                             <tr>   
                                 <td>Students</td>
-                                <td><select name="selected" onchange="handleSelect(this.form)"> 
+                                <td><select name="selected" onchange="handleSelect(this.form)">
                                     <% while (resultset.next()){ %>
                                     <option>
                                         <%= resultset.getString("id") %>

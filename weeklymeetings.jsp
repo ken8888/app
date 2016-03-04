@@ -96,20 +96,19 @@ DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
                         pstmt.setString(1, request.getParameter("meeting_type"));
                         pstmt.setString(2, request.getParameter("building_name"));
                         pstmt.setString(3, request.getParameter("room_number"));
-                        pstmt.setInt(
-                                4, Integer.parseInt(request.getParameter("start_time")));
-                        pstmt.setInt(
-                                5, Integer.parseInt(request.getParameter("end_time")));
-                        pstmt.setString(6, request.getParameter("attendance"));
-                        pstmt.setString(7, request.getParameter("start_date"));
-                        pstmt.setString(8, request.getParameter("end_date"));
-            DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 		Time start = new java.sql.Time(formatter.parse(request.getParameter("start_time")).getTime());
 				Time end = new java.sql.Time(formatter.parse(request.getParameter("end_time")).getTime());
                         pstmt.setTime(
-                                9,start );
+                                4,start );
                         pstmt.setTime(
-                                10,end );
+                                5,end );
+                        pstmt.setString(6, request.getParameter("attendance"));
+                        pstmt.setString(7, request.getParameter("start_date"));
+                        pstmt.setString(8, request.getParameter("end_date"));
+                        pstmt.setString(9, request.getParameter("day"));
+                        pstmt.setInt(
+                                10, Integer.parseInt(request.getParameter("meetingid")));
                         int rowCount = pstmt.executeUpdate();
 
                         // Commit transaction
