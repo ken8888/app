@@ -53,7 +53,7 @@
 
                         + " FROM course a, class b, pastclass c"
                         + " WHERE a.coursenumber = ? AND b.instructor = ? AND b.term = ?"
-                        + " AND a.coursenumber = b.course_title"
+                        + " AND a.coursenumber = b.course_title  and c.course_number = b.course_title  and b.section_id = c.section_id"
                        );
 
                     pstmt_iii = connection.prepareStatement(
@@ -61,11 +61,11 @@
                               + "COUNT(CASE WHEN c.grade_received IN ('B+','B','B-') THEN 1 END) AS numB,"
                               + "COUNT(CASE WHEN c.grade_received IN ('C+','C','C-') THEN 1 END) AS numC,"
                               + "COUNT(CASE WHEN c.grade_received IN ('D+','D','D-') THEN 1 END) AS numD,"
-                              + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
+                              + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther  "
 
                         + " FROM course a, class b, pastclass c"
                         + " WHERE a.coursenumber = ? AND b.instructor = ?"
-                        + " AND a.coursenumber = b.course_title"
+                        + " AND a.coursenumber = b.course_title  and c.course_number = b.course_title and b.section_id = c.section_id"
                        );
 
                     pstmt_iv = connection.prepareStatement(
@@ -76,15 +76,15 @@
                               + "COUNT(CASE WHEN c.grade_received IN ('F+','F','F-','P','NP') THEN 1 END) AS numOther"
 
                         + " FROM course a, class b, pastclass c"
-                        + " WHERE a.coursenumber = ?"
-                        + " AND a.coursenumber = b.course_title"
+                        + "  WHERE a.coursenumber = ? AND a.coursenumber = b.course_title and c.course_number = b.course_title and b.section_id = c.section_id"
                         );
 
                     pstmt_v = connection.prepareStatement(
                         "SELECT AVG(t.VALUE)"
                         + " FROM course a, class b, pastclass c, gradeconversion t"
                         + " WHERE a.coursenumber = ? AND b.instructor = ?"
-                        + " AND a.coursenumber = b.course_title"
+                        + " AND c.course_number = b.course_title and c.course_number = b.course_title  and b.section_id = c.section_id"
+
 
                         + " AND c.grade_received = t.lettergrade");
                     

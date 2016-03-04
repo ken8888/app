@@ -4,8 +4,6 @@
     <list default="true" id="226db450-253f-4978-b520-17870c8f7788" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/display_course_gradedistribution.jsp" afterPath="$PROJECT_DIR$/display_course_gradedistribution.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/display_scheduling_review.jsp" afterPath="$PROJECT_DIR$/display_scheduling_review.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/singlemeetings.jsp" afterPath="$PROJECT_DIR$/singlemeetings.jsp" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,8 +47,8 @@
       <file leaf-file-name="display_course_gradedistribution.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/display_course_gradedistribution.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56112224">
-              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.34268537">
+              <caret line="78" column="159" selection-start-line="78" selection-start-column="159" selection-end-line="78" selection-end-column="159" />
               <folding />
             </state>
           </provider>
@@ -133,8 +131,8 @@
         <option value="$PROJECT_DIR$/input_ms_requirements.jsp" />
         <option value="$PROJECT_DIR$/display_ms_requirements.jsp" />
         <option value="$PROJECT_DIR$/input_course_gradedistribution.jsp" />
-        <option value="$PROJECT_DIR$/display_course_gradedistribution.jsp" />
         <option value="$PROJECT_DIR$/display_scheduling_review.jsp" />
+        <option value="$PROJECT_DIR$/display_course_gradedistribution.jsp" />
       </list>
     </option>
   </component>
@@ -715,8 +713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/display_course_gradedistribution.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56112224">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34268537">
+          <caret line="78" column="159" selection-start-line="78" selection-start-column="159" selection-end-line="78" selection-end-column="159" />
           <folding />
         </state>
       </provider>
