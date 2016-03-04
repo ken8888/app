@@ -24,7 +24,7 @@
         
         <%!
         public class ClassRoster {
-            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
             String USERNAME = "sahmed123";
             String PASSWORD = "sahmed123";
 
@@ -70,9 +70,75 @@
                 }
                 return resultSet;
             }
+
+                  public void studentInfo(){
+                try{
+                    connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                    pstmt = connection.prepareStatement(
+                        "select * from student s where s.id =  ?");
+                   }catch(SQLException e){
+                        e.printStackTrace();
+                                        }
+               }
+                 public ResultSet getStudentInfo(String ID){
+                 try{
+                 studentInfo();
+                    pstmt.setString(1, ID);
+                    resultSet = pstmt.executeQuery();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                }
+
+                return resultSet;
+
+            }
         }
         %>
 
+        <%
+            String studentid = new String();
+
+            if(request.getParameter("ID") != null){
+                studentid = request.getParameter("ID");
+            }
+            ClassRoster student = new ClassRoster();
+            ResultSet studentInfo = student.getStudentInfo(studentid);
+        %>
+    <table border="1">
+    <tbody>
+    <tr>
+    <td>SSN</td>
+    <td>Student ID</td>
+    <td>First Name</td>
+    <td>Middle Name</td>
+    <td>Last Name</td>
+    <td>Residency</td>
+    <td>Enrollment</td>
+
+    </tr>
+        <%
+
+
+
+                while (studentInfo.next()){ %>
+    <tr>
+    <td><%= studentInfo.getInt("ssn") %></td>
+    <td><%= studentInfo.getString("id") %></td>
+    <td><%= studentInfo.getString("firstname") %></td>
+    <td><%= studentInfo.getString("middlename") %></td>
+    <td><%= studentInfo.getString("lastname") %></td>
+    <td><%= studentInfo.getString("residency") %></td>
+    <td><%= studentInfo.getString("enrollment") %></td>
+
+
+    </tr>
+        <% } %>
+    </tbody>
+
+
+    </table>
+
+    </br>
         <%
             String courseTitle = new String();
 
