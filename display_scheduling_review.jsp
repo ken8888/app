@@ -1,5 +1,5 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+<% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,9 +24,9 @@
         
         <%!
         public class Studentsclasses {
-            String URL = "jdbc:postgresql://localhost:5432/cse132b";
-            String USERNAME = "postgres";
-            String PASSWORD = "hardylou";
+            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String USERNAME = "sahmed123";
+            String PASSWORD = "sahmed123";
 
             Connection connection = null;
             PreparedStatement pstmt = null;
@@ -37,13 +37,13 @@
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                        " SELECT a.date, a.day, a.start_time, a.end_time" 
-                        + " FROM reviewsession a"
+                        " SELECT a._date, a.day, a.start_time, a.end_time" 
+                        + " FROM singleMeeting a"
                         + " WHERE NOT EXISTS"
                         + " (SELECT *" 
-                        + " FROM classmeeting c, weeklymeeting w"
+                        + " FROM classMeeting c, weeklymeeting w"
                         + " WHERE c.sectionid = ?"
-                        + " AND c.meetingid = w.id"
+                        + " AND c.meetingid = w.meetingid"
                         + " AND w.day = a.day"
                         + " AND ((a.start_time <= w.start_time"
                         + " AND w.start_time < a.end_time)"
@@ -84,10 +84,10 @@
                 Available times slots for Spring
                 <% while (classes.next()){ %>
                 <tr>
-                    <td><%= classes.getString("date") %></td>
-                    <td><%= classes.getString("day") %></td>
-                    <td><%= classes.getInt(3) %></td>
-                    <td><%= classes.getInt(4) %></td>
+                    <td><%= classes.getString(1) %></td>
+                    <td><%= classes.getString(2) %></td>
+                    <td><%= classes.getString(3) %></td>
+                    <td><%= classes.getString(4) %></td>
                 </tr>
                 <% } %>
             </tbody>

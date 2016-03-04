@@ -1,9 +1,9 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+<% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 <%
-   String URL = "jdbc:postgresql://localhost:5432/cse132b";
-   String USERNAME = "postgres";
-   String PASSWORD = "hardylou";
+   String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+   String USERNAME = "sahmed123";
+   String PASSWORD = "sahmed123";
    Connection connection = null;
    PreparedStatement pstmt = null;
    ResultSet resultset = null;
@@ -31,10 +31,10 @@
         try{
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             pstmt = connection.prepareStatement(
-            "SELECT DISTINCT x.sectionid"
+            "SELECT DISTINCT x.section_id"
             + " FROM class x"
             + " WHERE"
-            + " x.term = 'SP09'"
+            + " x.term = 'WI2016'"
             );
         } catch (SQLException e){
             e.printStackTrace();
@@ -70,7 +70,7 @@
                                 <td><select name="selected" onchange="handleSelect(this.form)"> 
                                     <% while (resultset.next()){ %>
                                     <option>
-                                        <%= resultset.getInt("sectionid") %>
+                                        <%= resultset.getInt("section_id") %>
                                     </option>
                                     <% } %>
                                 </select></td>

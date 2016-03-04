@@ -33,7 +33,7 @@
                     // Make a connection to the datasource "cse132b"
                     Connection conn = DriverManager.getConnection(
 
-                        "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b",
+                        "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b",
 
                         "sahmed123", "sahmed123");
             %>
@@ -149,7 +149,6 @@
                         <th>End Time</th>
                         <th>Attendance</th>
                         <th>Date</th>
-
                     </tr>
                     <tr>
                         <form action="singlemeetings.jsp" method="get">

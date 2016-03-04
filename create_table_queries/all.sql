@@ -143,6 +143,7 @@ start_time time,
 end_time time,
 attendance varchar(50),
 _date date,
+day varchar(50),
 primary key(meetingid),
 foreign key(meetingid) references classMeeting(meetingid)
 );
