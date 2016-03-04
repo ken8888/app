@@ -1,5 +1,5 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+<% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,9 +24,9 @@
         
         <%!
         public class ClassRoster {
-            String URL = "jdbc:postgresql://localhost:5432/cse132b";
-            String USERNAME = "postgres";
-            String PASSWORD = "hardylou";
+            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String USERNAME = "sahmed123";
+            String PASSWORD = "sahmed123";
 
             Connection connection = null;
             PreparedStatement pstmt = null;
@@ -37,17 +37,20 @@
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                    	"SELECT DISTINCT b.coursetitle, b2.coursetitle" // use c2.sectionid to test
-                        + " FROM ClassEnrollment a, Class b, ClassMeeting c, WeeklyMeeting w, Class b2, ClassMeeting c2, WeeklyMeeting w2"
+                    	"SELECT DISTINCT b.course_title, b2.course_title"
+
+                        + " FROM studentEnrollment a, class b, classMeeting c, weeklymeeting w, class b2, classMeeting c2, weeklymeeting w2"
+
                         + " WHERE a.studentid = ?"
-                        + " AND a.sectionid = b.sectionid"
-                        + " AND b.term = 'SP09'"
-                        + " AND b.sectionid = c.sectionid"
-                        + " AND c.meetingid = w.id"
-                        + " AND b2.term = 'SP09'"
-                        + " AND b2.sectionid = c2.sectionid"
-                        + " AND c2.meetingid = w2.id"
-                        //+ " AND w.day = w2.day AND (w.start_time >= w2.end_time OR w.end_time <= w2.start_time)" // class on same day, but no conflict
+                        + " AND a.SECTIONID = b.section_id"
+
+                        + " AND b.term = 'WI2016'"
+                        + " AND b.section_id = c.sectionid"
+                        + " AND c.meetingid = w.meetingid"
+
+                        + " AND b2.term = 'WI2016'"
+                        + " AND b2.section_id = c2.sectionid"
+                        + " AND c2.meetingid = w2.meetingid"
                         
                         + " AND w.day = w2.day"
                         + " AND ((w.start_time > w2.start_time AND w.start_time < w2.end_time) OR (w.end_time > w2.start_time AND w.end_time < w2.end_time))"
@@ -55,7 +58,6 @@
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
             }
 
             public ResultSet getStudents(String ID){
@@ -65,12 +67,11 @@
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-
                 return resultSet;
-
             }
         }
         %>
+
         <%
             String courseTitle = new String();
 
@@ -81,12 +82,14 @@
             ClassRoster stdstudents = new ClassRoster();
             ResultSet students = stdstudents.getStudents(courseTitle);
         %>
+
         <table border="1">
             <tbody>
                 <tr>
                     <td>Class Enrolled</td>
                     <td>Conflicts With</td>
                 </tr>
+
                 <% while (students.next()){ %>
                 <tr>
                     <td><%= students.getString(1) %></td>
@@ -95,7 +98,7 @@
                 <% } %>
             </tbody>
         </table>
-        
+
         </div>
         </div>
     </body>
