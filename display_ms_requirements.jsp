@@ -230,7 +230,7 @@
                 <tr>
                     <td><%= gpa.getString("name") %></td>
                     <td><%= gpa.getString("course_title") %></td>
-
+<td></td>
                 </tr>
                 <% } %>
             </tbody>

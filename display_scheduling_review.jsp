@@ -1,30 +1,30 @@
-<%@page language="java" import="java.sql.*" %>
-<% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
+    <%@page language="java" import="java.sql.*" %>
+            <% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 
-<%@page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        <%@page language="java" contentType="text/html; charset=UTF-8"
+                pageEncoding="UTF-8"%>
 
-<html>
-    <head>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+        <html>
+        <head>
         <title>Review Session Scheduling</title>
-    </head>
-    <body>
+        </head>
+        <body>
         <h1>Display the options for a review session</h1>
-        
+
         <div style = "width:100%">
-        
-            <div style = "float:left; width:20%;">
-                <%-- -------- Include menu HTML code -------- --%>
-                <jsp:include page="menu.html" />                
-            </div>
-        
-            <div style = "float:left; width: 80%;">
-        
-        <%!
+
+        <div style = "float:left; width:20%;">
+        <%-- -------- Include menu HTML code -------- --%>
+        <jsp:include page="menu.html" />
+        </div>
+
+        <div style = "float:left; width: 80%;">
+
+            <%!
         public class Studentsclasses {
-            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
             String USERNAME = "sahmed123";
             String PASSWORD = "sahmed123";
 
@@ -33,14 +33,14 @@
             ResultSet resultSet = null;
 
             public Studentsclasses(){
-                
+
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                        " SELECT a._date, a.day, a.start_time, a.end_time" 
+                        " SELECT a._date, a.day, a.start_time, a.end_time"
                         + " FROM singleMeeting a"
                         + " WHERE NOT EXISTS"
-                        + " (SELECT *" 
+                        + " (SELECT *"
                         + " FROM classMeeting c, weeklymeeting w"
                         + " WHERE c.sectionid = ?"
                         + " AND c.meetingid = w.meetingid"
@@ -69,8 +69,8 @@
             }
         }
         %>
-        <%
-            int studentID = 0;  
+            <%
+            int studentID = 0;
 
             if(request.getParameter("ID") != null){
                 studentID = Integer.parseInt(request.getParameter("ID"));
@@ -80,20 +80,20 @@
             ResultSet classes = stdclasses.getClasses(studentID);
         %>
         <table border="1">
-            <tbody>
-                Available times slots for Spring
-                <% while (classes.next()){ %>
-                <tr>
-                    <td><%= classes.getString(1) %></td>
-                    <td><%= classes.getString(2) %></td>
-                    <td><%= classes.getString(3) %></td>
-                    <td><%= classes.getString(4) %></td>
-                </tr>
-                <% } %>
-            </tbody>
+        <tbody>
+        Available times slots for Spring
+            <% while (classes.next()){ %>
+        <tr>
+        <td><%= classes.getString(1) %></td>
+        <td><%= classes.getString(2) %></td>
+        <td><%= classes.getString(3) %></td>
+        <td><%= classes.getString(4) %></td>
+        </tr>
+            <% } %>
+        </tbody>
         </table>
-        
+
         </div>
         </div>
-    </body>
-</html>
+        </body>
+        </html>

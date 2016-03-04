@@ -22,11 +22,11 @@
                         <tbody>
                             <tr>   
                                 <td>Course Title :</td>
-                                <td><input value="" name="TITLE" size="20"></td>
+                                <td><input value=" " name="TITLE" size="20"></td>
                                 <td>Professor :</td>
-                                <td><input value="" name="INSTRUCTOR" size="20"></td>
+                                <td><input value=" " name="INSTRUCTOR" size="20"></td>
                                 <td>Term :</td>
-                                <td><input value="" name="TERM" size="5"></td>
+                                <td><input value=" " name="TERM" size="5"></td>
                             </tr>
                         </tbody>
                     </table>

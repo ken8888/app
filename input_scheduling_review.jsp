@@ -1,7 +1,7 @@
 <%@page language="java" import="java.sql.*" %>
 <% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 <%
-   String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+   String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
    String USERNAME = "sahmed123";
    String PASSWORD = "sahmed123";
    Connection connection = null;

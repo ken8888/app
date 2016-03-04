@@ -23,7 +23,7 @@
         <div style = "float:left; width: 80%;">
         <%!
         public class GradeReport {
-            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String URL = "jdbc:sqlserver://MR_HE\\SQLEXPRESS;databaseName=cse132b";
             String USERNAME = "sahmed123";
             String PASSWORD = "sahmed123";
 
@@ -81,12 +81,12 @@
                         + " AND b.section_id = c.section_id");
                     
                     pstmt_v = connection.prepareStatement(
-                        "SELECT AVG(t.number_grade)"
+                        "SELECT AVG(t.VALUE)"
                         + " FROM course a, class b, pastclass c, gradeconversion t"
                         + " WHERE a.title = ? AND b.instructor = ?"
                         + " AND a.title = b.course_title"
                         + " AND b.section_id = c.section_id"
-                        + " AND c.grade_received = t.letter_grade");
+                        + " AND c.grade_received = t.lettergrade");
                     
                 } catch (SQLException e){
                     e.printStackTrace();
