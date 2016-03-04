@@ -1,5 +1,5 @@
 <%@page language="java" import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+<% DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver()); %>
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,9 +24,9 @@
         
         <%!
         public class ClassRoster {
-            String URL = "jdbc:postgresql://localhost:5432/cse132b";
-            String USERNAME = "postgres";
-            String PASSWORD = "hardylou";
+            String URL = "jdbc:sqlserver://SHAMIM-PC\\SQLEXPRESS;databaseName=cse132b";
+            String USERNAME = "sahmed123";
+            String PASSWORD = "sahmed123";
 
             Connection connection = null;
             PreparedStatement pstmt = null;
@@ -37,11 +37,11 @@
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                        "SELECT b.studentid, s.firstname, s.middlename, s.lastname, b.grade, b.units"
-                        + " FROM class a, classenrollment b, course c, student s"
-                        + " WHERE c.title = ?"
-                        + " AND a.coursetitle = c.title"
-                        + " AND b.sectionid = a.sectionid"
+                        "SELECT b.studentid, s.firstname, s.middlename, s.lastname, b.gradetype, b.units"
+                        + " FROM class a, studentEnrollment b, course c, student s"
+                        + " WHERE c.coursenumber = ?"
+                        + " AND a.course_title = c.coursenumber"
+                        + " AND b.SECTIONID = a.section_id"
                         + " AND s.id = b.studentid");
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -88,7 +88,7 @@
                     <td><%= students.getString("firstname") %></td>
                     <td><%= students.getString("middlename") %></td>
                     <td><%= students.getString("lastname") %></td>
-                    <td><%= students.getString("grade") %></td>
+                    <td><%= students.getString("gradetype") %></td>
                     <td><%= students.getString("units") %></td>
                 </tr>
                 <% } %>
