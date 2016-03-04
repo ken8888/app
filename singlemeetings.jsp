@@ -83,7 +83,7 @@
                         // Create the prepared statement and use it to
                         // UPdate the student attributes in the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "UPdate WeeklyMeeting SET meeting_type = ?, building_name = ?, room_number = ?, " + 
+                            "UPDATE singleMeeting SET meeting_type = ?, building_name = ?, room_number = ?, " + 
                             "start_time = ?, end_time = ?, attendance = ?, _date = ?, day = ? " +
                             " WHERE meetingid = ?");
 
@@ -116,7 +116,7 @@
                         // Create the prepared statement and use it to
                         // DELETE the student FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "DELETE FROM SingleMeeting WHERE meetingid = ?");
+                            "DELETE FROM singleMeeting WHERE meetingid = ?");
 
                         pstmt.setInt(
                                 1, Integer.parseInt(request.getParameter("meetingid")));
@@ -136,7 +136,7 @@
                     // Use the created statement to SELECT
                     // the student attributes FROM the Student table.
                     ResultSet rs = statement.executeQuery
-                        ("SELECT * FROM SingleMeeting");
+                        ("SELECT * FROM singleMeeting");
             %>
 
             <!-- Add an HTML table header row to format the results -->
@@ -164,7 +164,7 @@
                             <th><input value="" name="attendance" size="10"></th>
                             <th><input value="" name="_date" size="10"></th>
                             <th><input value="" name="day" size="10"></th>
-                            
+
                             <th><input type="submit" value="Insert"></th>
                         </form>
                     </tr>
