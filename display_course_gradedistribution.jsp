@@ -83,7 +83,7 @@
                         "SELECT AVG(t.VALUE)"
                         + " FROM course a, class b, pastclass c, gradeconversion t"
                         + " WHERE a.coursenumber = ? AND b.instructor = ?"
-                        + " AND c.course_number = b.course_title and c.course_number = b.course_title  and b.section_id = c.section_id"
+                        + " AND a.coursenumber = b.course_title and c.course_number = b.course_title  and b.section_id = c.section_id"
 
 
                         + " AND c.grade_received = t.lettergrade");

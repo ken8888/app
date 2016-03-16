@@ -48,7 +48,7 @@
 
                     ); 
                     pstmt_gpa = connection.prepareStatement(
-                    "with taken as (select se.COURSENUMBER as coursenumber from studentEnrollment se where se.studentid = ? union select p.course_number as coursenumber from pastclass p where p.student_id = ?) select distinct course_title, name from class c, concentration con where  con.reqcourse like '%' + c.course_title + '%'  except select distinct course_title, name from class c, concentration con, taken t where  con.reqcourse like '%' + c.course_title + '%' and c.course_title  = t.coursenumber"
+                    "with taken as (select se.COURSENUMBER as coursenumber from studentEnrollment se where se.studentid = ? union select p.course_number as coursenumber from pastclass p where p.student_id = ?) select distinct course_title, name, n.nextterm from class c, concentration con, nextoffer n where  con.reqcourse like '%' + c.course_title + '%' and n.coursenumber = c.course_title except select distinct course_title, name, n.nextterm from nextoffer n, class c, concentration con, taken t where  con.reqcourse like '%' + c.course_title + '%' and c.course_title  = t.coursenumber and n.coursenumber = c.course_title"
 
                     );
 
@@ -230,7 +230,9 @@
                 <tr>
                     <td><%= gpa.getString("name") %></td>
                     <td><%= gpa.getString("course_title") %></td>
-<td></td>
+    <td><%= gpa.getString("nextterm") %></td>
+
+    <td></td>
                 </tr>
                 <% } %>
             </tbody>

@@ -37,18 +37,7 @@
                 try {
                     connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
                     pstmt = connection.prepareStatement(
-                        " SELECT a._date, a.day, a.start_time, a.end_time"
-                        + " FROM singleMeeting a"
-                        + " WHERE NOT EXISTS"
-                        + " (SELECT *"
-                        + " FROM classMeeting c, weeklymeeting w"
-                        + " WHERE c.sectionid = ?"
-                        + " AND c.meetingid = w.meetingid"
-                        + " AND w.day = a.day"
-                        + " AND ((a.start_time <= w.start_time"
-                        + " AND w.start_time < a.end_time)"
-                        + " OR (a.start_time <= w.start_time"
-                        + " AND w.end_time <= a.end_time)))"
+                        "with newscore as (select distinct studentid from classMeeting sm, studentEnrollment se where sm.sectionid = se.SECTIONID and sm.sectionid = ?) select  a.day, a.start_time, a.end_time from singleMeeting a except (select   wm.day, wm.start_time, wm.end_time from newscore, studentEnrollment ss, classmeeting cm, weeklymeeting wm where ss.studentid = newscore.studentid and ss.sectionid = cm.sectionid and cm.meetingid = wm.meetingid union select  sm.day, sm.start_time, sm.end_time from newscore, studentEnrollment ss, classmeeting cm, singleMeeting sm where ss.studentid = newscore.studentid and ss.sectionid = cm.sectionid and cm.meetingid = sm.meetingid)"
                     );
                 } catch (SQLException e){
                     e.printStackTrace();
@@ -83,25 +72,23 @@
 
         <table border="1">
         <tbody>
+        <tr>
+<td>Date</td>
+        <td>Days</td>
+        <td>Beginning Time</td>
+        <td>Ending Time</td>
+        </tr>
 
-
-                <tr>
-                <td>Date</td>
-                <td>Days</td>
-                <td>Beginning Time</td>
-                <td>Ending Time</td>
-                </tr>
-
-                Available times slots for Review
-                <% while (classes.next()){ %>
-                <tr>
-                    <td><%= classes.getString(1) %></td>
-                    <td><%= classes.getString(2) %></td>
-                    <td><%= classes.getString(3) %></td>
-                    <td><%= classes.getString(4) %></td>
-                </tr>
-                <% } %>
-            </tbody>
+        Available times slots for Review
+            <% while (classes.next()){ %>
+        <tr>
+        <td>2016-2-12</td>
+        <td><%= classes.getString(1) %></td>
+        <td><%= classes.getString(2) %></td>
+        <td><%= classes.getString(3) %></td>
+        </tr>
+            <% } %>
+        </tbody>
         </table>
 
         </div>
